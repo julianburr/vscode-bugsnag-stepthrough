@@ -1,0 +1,18 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Build files
+out
+
+# Dependency directories
+node_modules
+jspm_packages
+
+# Optional npm cache directory
+.npm
+
+# Misc
+.DS_Store
+tsconfig.tsbuildinfo

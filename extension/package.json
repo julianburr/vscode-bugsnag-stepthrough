@@ -1,0 +1,69 @@
+{
+  "name": "vs-code-bugsnag-stepthrough",
+  "description": "Bugsnag Stepthrough - VSCode Extension",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.23.0"
+  },
+  "main": "./out/extension",
+  "license": "MIT",
+  "activationEvents": [
+    "*"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "bugsnagStepthrough",
+          "title": "Bugsnag Stepthrough",
+          "icon": "assets/icons/logo.svg"
+        }
+      ]
+    },
+    "views": {
+      "bugsnagStepthrough": [
+        {
+          "id": "bugsnagStepthrough.stepthrough",
+          "name": "Bugsnag Stepthrough",
+          "contextualTitle": "Bugsnag Stepthrough",
+          "visibility": "visible",
+          "type": "webview"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn build",
+    "build": "yarn extension:build --minify && yarn webviews:build --splitting --minify",
+    "dev": "stmux --title \"bugsnag-stepthrough\" --mouse --wait error --error ERROR --method beep,system -- [ [ -t \"[extension]   Hit 'ctrl+a ?' for help. \" \"yarn extension:dev\" ] : [ -t \"[webviews]   Hit 'ctrl+a ?' for help. \" \"yarn webviews:dev\" ] ]",
+    "extension:build": "esbuild ./src/extension/index.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "extension:dev": "yarn extension:build --sourcemap --watch",
+    "webviews:build": "esbuild ./src/webview/*.tsx --bundle --outdir=out/webview --format=esm",
+    "webviews:dev": "yarn webviews:build --watch",
+    "typecheck": "tsc -p ./",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "node-fetch": "^3.1.0",
+    "react": "^17.0.2",
+    "react-cool-form": "^0.4.1",
+    "react-dom": "^17.0.2",
+    "react-is": "^17.0.2",
+    "react-router-dom": "^6.2.1",
+    "styled-components": "^5.3.3",
+    "vscode": "^1.1.37"
+  },
+  "devDependencies": {
+    "@types/node": "^16.10.2",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-router-dom": "^5.3.2",
+    "@types/vscode": "^1.63.1",
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
+    "esbuild": "^0.14.11",
+    "eslint": "^8.6.0",
+    "stmux": "^1.8.3",
+    "typescript": "^4.5.4"
+  }
+}
