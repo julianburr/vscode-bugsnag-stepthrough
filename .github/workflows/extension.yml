@@ -3,7 +3,7 @@ name: Publish Extension
 on:
   push:
     branches:
-      - main
+      - feat/setup
     paths:
       - extension/**
 
@@ -13,6 +13,35 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Check if this works
+      - name: Run tests and linter
+        working-directory: ./extension
         run: |-
-          echo "Hello World"
+          yarn
+          yarn lint --quiet
+          yarn typecheck
+
+      - name: Get version from package.json
+        id: package-version
+        working-directory: ./extension
+        uses: martinbeentjes/npm-get-version-action@master
+
+      - name: Check if tag for this version already exists
+        uses: mukunku/tag-exists-action@v1.0.0
+        id: checkTag
+        with:
+          tag: "v${{ steps.package-version.outputs.current-version }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create tag for version if it is new
+        if: ${{ steps.checkTag.outputs.exists == false }}
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: "v${{ steps.package-version.outputs.current-version }}"
+          message: "Release v${{ steps.package-version.outputs.current-version }}"
+
+      - name: Publish extension to marketplace if version changed
+        if: ${{ steps.checkTag.outputs.exists == false }}
+        working-directory: ./extension
+        run: |-
+          VSCE_PAT=${{ secret.AZURE_ACCESS_TOKEN }} yarn release
