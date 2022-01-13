@@ -8,7 +8,7 @@ on:
       - extension/**
 
 jobs:
-  deploy_production:
+  deploy_extension:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -35,14 +35,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create tag for version if it is new
-        if: ${{ steps.checkTag.outputs.exists == false }}
+        if: ${{ steps.checkTag.outputs.exists == "false" }}
         uses: rickstaa/action-create-tag@v1
         with:
           tag: "v${{ steps.package-version.outputs.current-version }}"
           message: "Release v${{ steps.package-version.outputs.current-version }}"
 
       - name: Publish extension to marketplace if version changed
-        if: ${{ steps.checkTag.outputs.exists == false }}
+        if: ${{ steps.checkTag.outputs.exists == "false" }}
         working-directory: ./extension
         run: |-
           VSCE_PAT=${{ secrets.AZURE_ACCESS_TOKEN }} yarn release
