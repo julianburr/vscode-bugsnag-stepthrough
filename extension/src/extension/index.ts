@@ -7,7 +7,7 @@ export function activate(context: ExtensionContext) {
   const stepthrough = new Provider({
     context,
     entryScript: "index.js",
-    id: "stepthrough",
+    id: "webview",
   });
 
   const stepthroughPanel = window.registerWebviewViewProvider(
