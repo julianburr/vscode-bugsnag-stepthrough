@@ -6,7 +6,9 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev",
-    "postinstall": "remix setup node"
+    "postinstall": "remix setup node",
+    "lint": "eslint .",
+    "typecheck": "tsc -p ."
   },
   "dependencies": {
     "@remix-run/react": "^1.1.1",

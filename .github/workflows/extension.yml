@@ -1,0 +1,18 @@
+name: Publish Extension
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - extension/**
+
+jobs:
+  deploy_production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Check if this works
+        run: |-
+          echo "Hello World"
