@@ -22,8 +22,9 @@ jobs:
 
       - name: Get version from package.json
         id: package-version
-        working-directory: ./extension
         uses: martinbeentjes/npm-get-version-action@master
+        with:
+          path: ./extension
 
       - name: Check if tag for this version already exists
         uses: mukunku/tag-exists-action@v1.0.0
