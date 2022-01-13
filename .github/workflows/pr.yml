@@ -17,12 +17,12 @@ jobs:
         working-directory: ./extension
         run: |-
           yarn
-          yarn lint
+          yarn lint --quiet
           yarn typecheck
 
       - name: Run tests and linter in website dir
         working-directory: ./website
         run: |-
           yarn
-          yarn lint
+          yarn lint --quiet
           yarn typecheck

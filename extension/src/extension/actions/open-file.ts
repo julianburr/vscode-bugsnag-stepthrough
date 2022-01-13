@@ -11,12 +11,12 @@ export const openFile = {
     );
 
     const filePath = path.resolve(__dirname, "./extension.js");
-    var openPath = Uri.file(filePath);
+    const openPath = Uri.file(filePath);
 
     workspace.openTextDocument(openPath).then((doc) => {
       window.showTextDocument(doc).then((editor) => {
         editor.selections = [new Selection(pos, pos)];
-        var range = new Range(pos, pos);
+        const range = new Range(pos, pos);
         editor.revealRange(range);
       });
     });

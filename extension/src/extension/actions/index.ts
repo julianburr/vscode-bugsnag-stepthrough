@@ -11,7 +11,7 @@ export type Action = {
   handler: (args: ActionArgs) => any;
 };
 
-let actions: Action[] = [];
+const actions: Action[] = [];
 
 export function registerAction(action: Action) {
   actions.push(action);

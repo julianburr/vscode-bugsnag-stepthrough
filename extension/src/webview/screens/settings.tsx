@@ -28,14 +28,14 @@ export function SettingsScreen() {
       <h1>Settings</h1>
       <Link to="/">Close</Link>
 
-      {settings?.global?.tokens?.length! ? (
+      {settings?.global?.tokens?.length ? (
         <p>
           Select the projects below that you want to associate with the current
           workspace.
         </p>
       ) : (
         <p>
-          You haven't added any access token yet. Please enter one below to get
+          You haven’t added any access token yet. Please enter one below to get
           started.
         </p>
       )}

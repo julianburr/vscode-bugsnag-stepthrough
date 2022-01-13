@@ -25,6 +25,7 @@ export function createWebview(
 
   const scriptUri = webview.asWebviewUri(
     // Not sure why TS complains about `.joinPath` not existing here :/
+    // eslint-disable-next-line
     // @ts-ignore
     Uri.joinPath(context.extensionUri, "out", "webview", entryScript)
   );

@@ -19,4 +19,6 @@ export function activate(context: ExtensionContext) {
   context.subscriptions.push(stepthroughPanel);
 }
 
-export function deactivate() {}
+export function deactivate() {
+  // Any potential cleanups
+}

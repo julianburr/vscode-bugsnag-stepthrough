@@ -20,6 +20,8 @@ type SendMessageOptions = {
   timeout?: number;
 };
 
+let timer: any;
+
 // Since sending messages to vscode and receiving responses is a bit convoluted
 // this helper function will deal with the overhead and return a promise that
 // resolves the response data if it's received within the given timeout
@@ -28,7 +30,6 @@ export function sendMessage(
   { data, timeout = 10000 }: SendMessageOptions = {}
 ): Promise<Message> {
   return new Promise((resolve, reject) => {
-    let timer: any;
     const handleMessage = (message: {
       data: { command: string; data: any };
     }) => {
