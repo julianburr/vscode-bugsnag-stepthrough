@@ -45,4 +45,4 @@ jobs:
         if: ${{ steps.checkTag.outputs.exists == false }}
         working-directory: ./extension
         run: |-
-          VSCE_PAT=${{ secret.AZURE_ACCESS_TOKEN }} yarn release
+          VSCE_PAT=${{ secrets.AZURE_ACCESS_TOKEN }} yarn release
