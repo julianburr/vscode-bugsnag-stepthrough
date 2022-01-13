@@ -1,7 +1,8 @@
 {
   "name": "vscode-bugsnag-stepthrough",
-  "description": "Bugsnag Stepthrough - VSCode Extension",
-  "version": "0.0.1",
+  "displayName": "Bugsnag Stepthrough",
+  "description": "VS Code plugin for Bugsnag",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.63.1"
   },
@@ -9,6 +10,16 @@
   "license": "MIT",
   "author": "Julian Burr <hello@julianburr.de>",
   "publisher": "julianburr",
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "Bugtracking",
+    "Bugsnag",
+    "Bugs"
+  ],
+  "preview": true,
+  "icon": "./assets/images/icon.png",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/julianburr/vscode-bugsnag-stepthrough.git"
