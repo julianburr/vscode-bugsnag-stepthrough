@@ -19,7 +19,7 @@
     "Bugs"
   ],
   "preview": true,
-  "icon": "./assets/images/icon.png",
+  "icon": "assets/images/icon.png",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/julianburr/vscode-bugsnag-stepthrough.git"
