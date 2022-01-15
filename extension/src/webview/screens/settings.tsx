@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useForm } from "react-cool-form";
 import styled from "styled-components";
 
-import { useSettings } from "../hooks/settings";
+import { useSettings } from "../hooks/use-settings";
 import { AccountSettings } from "../components/account-settings";
 import { Header } from "../components/header";
 import { Input } from "../components/input";

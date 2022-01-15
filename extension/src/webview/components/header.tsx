@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
-import { Link } from "src/webview/components/link";
+import { Link } from "./link";
+
 import ArrowLeftSvg from "assets/icons/vscode/arrow-left.svg";
 import SettingsSvg from "assets/icons/vscode/settings-gear.svg";
+import ExternalSvg from "assets/icons/vscode/link-external.svg";
 
 const Container = styled.header`
   display: flex;
@@ -40,13 +42,30 @@ const IconLink = styled(Link)`
   }
 `;
 
+const IconA = styled.a`
+  margin: 3px 0 0;
+
+  svg {
+    height: 1em;
+    margin: 0;
+  }
+`;
+
 type HeaderProps = {
   title: string;
   backTo?: string;
   settingsLink?: boolean;
+  externalLink?: string;
+  externalTitle?: string;
 };
 
-export function Header({ title, backTo, settingsLink }: HeaderProps) {
+export function Header({
+  title,
+  backTo,
+  settingsLink,
+  externalLink,
+  externalTitle,
+}: HeaderProps) {
   return (
     <Container>
       <Left>
@@ -57,10 +76,22 @@ export function Header({ title, backTo, settingsLink }: HeaderProps) {
         )}
         <Title paddingLeft={!!backTo}>{title}</Title>
       </Left>
+
       {settingsLink && (
         <IconLink to="/settings" title="Go to settings">
           <SettingsSvg />
         </IconLink>
+      )}
+
+      {externalLink && (
+        <IconA
+          href={externalLink}
+          target="_blank"
+          rel="noreferrer nofollow"
+          title={externalTitle}
+        >
+          <ExternalSvg />
+        </IconA>
       )}
     </Container>
   );

@@ -3,8 +3,8 @@ import { useForm } from "react-cool-form";
 
 import { IntroScreen } from "./intro";
 
-import { useSettings } from "../hooks/settings";
-import { useBugsnagErrors } from "../hooks/bugsnag";
+import { useSettings } from "../hooks/use-settings";
+import { useBugsnagErrors } from "../hooks/bugsnag/use-bugsnag-errors";
 import { Header } from "../components/header";
 import { Select } from "../components/select";
 import { Spacer } from "../components/spacer";
@@ -56,7 +56,7 @@ export function OverviewScreen() {
   }
 
   const totalErrors =
-    errors?.open?.length + errors?.skipped?.length + errors?.resolved?.length;
+    errors?.open?.length + errors?.skipped?.length + errors?.fixed?.length;
 
   return (
     <>
@@ -98,7 +98,7 @@ export function OverviewScreen() {
           <OverviewStats
             open={errors.open.length}
             skipped={errors.skipped.length}
-            resolved={errors.resolved.length}
+            fixed={errors.fixed.length}
             active={settings.workspace.activeTab || "open"}
             onClick={(tab) => update.workspace?.("activeTab", tab)}
           />

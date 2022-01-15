@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 import styled from "styled-components";
 
-import { useSettings } from "../hooks/settings";
-import { useBugnsagOrganisation } from "../hooks/bugsnag";
+import { useSettings } from "../hooks/use-settings";
+import { useBugnsagOrganisation } from "../hooks/bugsnag/use-bugsnag-organisation";
 import { confirm } from "../utils/vscode";
 
 import { Checkbox } from "./checkbox";

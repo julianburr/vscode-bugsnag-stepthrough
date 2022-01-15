@@ -9,8 +9,9 @@ const Container = styled.div`
   align-items: center;
   text-align: center;
   width: 100%;
-  max-width: 100px;
+  max-width: 170px;
   margin: 0 auto;
+  opacity: 0.5;
 
   & svg {
     opacity: 0.5;

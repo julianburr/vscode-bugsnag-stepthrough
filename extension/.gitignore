@@ -16,3 +16,6 @@ jspm_packages
 # Misc
 .DS_Store
 tsconfig.tsbuildinfo
+
+# Env
+env.ts
