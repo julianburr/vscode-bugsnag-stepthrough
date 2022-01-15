@@ -13,6 +13,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Check if this works
+      - name: Install dependencies
         run: |-
-          echo "Hello World"
+          yarn
+
+      - name: Linting and typechecks
+        run: |-
+          yarn lint
+          yarn typecheck
+
+      - name: Deploy via Vercel
+        uses: ./.github/actions/custom-actions/deploy-vercel
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+          vercel-token: ${{ secrets.VERCEL_TOKEN}}
+          is-production: true
+          add-comment: false
