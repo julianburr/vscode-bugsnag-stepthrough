@@ -1,4 +1,4 @@
-# Bugsnag Stepthrough - VSCode Extension
+# VS Code Bugsnag Extension
 
 ...
 
