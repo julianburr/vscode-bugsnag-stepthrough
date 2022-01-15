@@ -27,17 +27,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Create env.ts file
+        working-directory: ./extension
+        run: |-
+          echo 'export const API_BASE_URL = "http://localhost:3000";' > src/env.ts
+
       - name: Run tests and linter
         working-directory: ./extension
         run: |-
           yarn
           yarn lint --quiet
           yarn typecheck
-
-      - name: Create env.ts file
-        working-directory: ./extension
-        run: |-
-          echo 'export const API_BASE_URL = "http://localhost:3000";' > src/env.ts
 
       - name: Publish extension to marketplace if version changed
         if: ${{ steps.check-tag.outputs.exists == 'false' }}
