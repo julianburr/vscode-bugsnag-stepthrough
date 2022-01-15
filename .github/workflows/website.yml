@@ -13,6 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Checkout GitHub Actions Repo
+        uses: actions/checkout@v2
+        with:
+          repository: julianburr/github-actions
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: .github/actions/custom-actions
+
       - name: Install dependencies
         working-directory: ./website
         run: |-
