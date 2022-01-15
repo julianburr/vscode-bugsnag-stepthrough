@@ -34,7 +34,7 @@ const Circle = styled.circle<{ size: number; width: number; color: string }>`
   stroke-dasharray: ${(props) => Math.PI * props.size}px;
   stroke-radius: ${(props) => `${props.width}px`};
   transform-origin: ${(props) => `${props.size / 2}px ${props.size / 2}px 0`};
-  animation: ${spin} 2s linear infinite;
+  animation: ${spin} 3s linear infinite;
 `;
 
 type SpinnerProps = {
@@ -44,7 +44,7 @@ type SpinnerProps = {
 };
 
 export function Spinner({
-  size = 24,
+  size = 18,
   width = 2,
   color = "var(--vscode-foreground)",
 }: SpinnerProps) {

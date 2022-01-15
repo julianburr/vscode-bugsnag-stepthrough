@@ -87,5 +87,86 @@ export type ErrorDetails = {
   _status: string;
   _open: () => Promise<void>;
   _skip: () => Promise<void>;
-  _resolve: () => Promise<void>;
+  _fix: () => Promise<void>;
+};
+
+export type EventTrace = {
+  column_number: number;
+  in_project: boolean | null;
+  line_number: number;
+  method: string;
+  file: string;
+  type: any;
+  code: string | null;
+  code_file: string | null;
+  address_offset: any;
+  macho_uuid: string | null;
+  source_control_link: string | null;
+  source_control_name: string;
+};
+
+export type EventBreadcrumb = {
+  timestamp: string;
+  name: string;
+  type: string;
+  metaData?: {
+    title?: string;
+    state?: any;
+    prevState?: any;
+    to?: string;
+    from?: string;
+  };
+};
+
+export type EventDetails = {
+  id: string;
+  url: string;
+  project_url: string;
+  is_full_report: boolean;
+  error_id: string;
+  received_at: string;
+  exceptions: {
+    error_class: string;
+    message: string;
+    type: string;
+    stacktrace: EventTrace[];
+    registers: any;
+  }[];
+  threads: any;
+  metaData: {
+    device: {
+      userAgent: string;
+    };
+  };
+  request: {
+    url: string;
+    clientIp: string;
+    headers: any;
+  };
+  app: {
+    releaseStage: string;
+    type: string;
+    duration: number;
+  };
+  device: {
+    id: string;
+    osName: string;
+    browserName: string;
+    browserVersion: string;
+    orientation: string;
+    locale: string;
+    time: string;
+  };
+  user: any;
+  breadcrumbs: EventBreadcrumb[];
+  context: string;
+  severity: string;
+  unhandled: boolean;
+  feature_flags: any[];
+};
+
+export type TrendBucket = {
+  from: string;
+  to: string;
+  events_count: number;
 };

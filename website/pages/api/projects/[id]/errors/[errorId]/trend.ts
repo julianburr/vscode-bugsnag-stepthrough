@@ -8,9 +8,9 @@ export default async function handler(
 ) {
   await cors(req, res);
 
-  const { id, ...query } = req.query;
+  const { id, errorId, ...query } = req.query;
   const { response, json } = await forwardToBugsnag(
-    `/organizations/${id}/projects`,
+    `/projects/${id}/errors/${errorId}/trend`,
     query
   );
 

@@ -2,7 +2,7 @@ import { render } from "react-dom";
 import { HashRouter, Routes, Route, Outlet } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
-import { SettingsProvider, useSettings } from "./hooks/settings";
+import { SettingsProvider, useSettings } from "./hooks/use-settings";
 import { DetailsScreen } from "./screens/details";
 import { IntroScreen } from "./screens/intro";
 import { OverviewScreen } from "./screens/overview";

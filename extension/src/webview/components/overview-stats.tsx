@@ -76,15 +76,15 @@ const Success = styled.button``;
 type OverviewStatsProps = {
   open: number;
   skipped: number;
-  resolved: number;
+  fixed: number;
   active: string;
-  onClick: (clicked: "open" | "skipped" | "resolved") => void;
+  onClick: (clicked: "open" | "skipped" | "fixed") => void;
 };
 
 export function OverviewStats({
   open,
   skipped,
-  resolved,
+  fixed,
   active,
   onClick,
 }: OverviewStatsProps) {
@@ -97,7 +97,9 @@ export function OverviewStats({
         })}
         onClick={() => onClick("open")}
       >
-        <b>{open}</b> open errors
+        <b>{open}</b> open
+        <br />
+        errors
       </Errors>
       <Warnings
         className={classnames({
@@ -106,16 +108,20 @@ export function OverviewStats({
         })}
         onClick={() => onClick("skipped")}
       >
-        <b>{skipped}</b> skipped errors
+        <b>{skipped}</b> skipped
+        <br />
+        errors
       </Warnings>
       <Success
         className={classnames({
-          active: active === "resolved",
-          noerrors: resolved === 0,
+          active: active === "fixed",
+          noerrors: fixed === 0,
         })}
-        onClick={() => onClick("resolved")}
+        onClick={() => onClick("fixed")}
       >
-        <b>{resolved}</b> marked resolved
+        <b>{fixed}</b> marked
+        <br />
+        fixed
       </Success>
     </Container>
   );

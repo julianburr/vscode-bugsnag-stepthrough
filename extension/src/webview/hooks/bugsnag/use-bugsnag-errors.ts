@@ -1,46 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-import { ErrorDetails, Organisation, Project } from "../types/bugsnag";
-import { getErrors, getOrganisations, getProjects } from "../utils/bugsnag";
+import { ErrorDetails } from "src/webview/types/bugsnag";
+import { getErrors } from "src/webview/utils/bugsnag";
 
-import { useSettings } from "./settings";
-
-type OrganisationResponse = {
-  data?: Organisation;
-  projects?: Project[];
-};
-
-type UseBugnsagOrganisationArgs = {
-  token: string;
-};
-
-export function useBugnsagOrganisation({ token }: UseBugnsagOrganisationArgs) {
-  const [loading, setLoading] = useState(true);
-  const [organisation, setOrganisation] = useState<OrganisationResponse>({});
-
-  const loadData = useCallback(async ({ token }) => {
-    setLoading(true);
-    const organisations = await getOrganisations({ token });
-    const projects = await getProjects({
-      token,
-      orgId: organisations?.[0]?.id,
-    });
-
-    setOrganisation({ data: organisations?.[0], projects });
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    loadData({ token });
-  }, [token]);
-
-  return { loading, organisation };
-}
+import { useSettings } from "../use-settings";
 
 type GroupedErrors = {
   open: ErrorDetails[];
   skipped: ErrorDetails[];
-  resolved: ErrorDetails[];
+  fixed: ErrorDetails[];
 };
 
 type ProjectSetting = {
@@ -87,51 +55,53 @@ export function useBugsnagErrors({ projects, filters }: UseBugsnagErrorsArgs) {
   );
 
   const skipped = settings?.workspace.skippedErrors || [];
-  const resolved = settings?.workspace.resolvedErrors || [];
+  const fixed = settings?.workspace.fixedErrors || [];
   const groupedErrors = useMemo(() => {
     return errors.reduce<GroupedErrors>(
       (all, error) => {
         const enhancedError = { ...error };
         enhancedError._status = "skipped";
 
-        enhancedError._open = async () => {
+        async function clean() {
           await update.workspace?.(
             "skippedErrors",
             skipped.filter((id) => error.id !== id)
           );
           await update.workspace?.(
-            "resolvedErrors",
-            resolved.filter((id) => error.id !== id)
+            "fixedErrors",
+            fixed.filter((id) => error.id !== id)
           );
+        }
+
+        enhancedError._open = async () => {
+          await clean();
         };
 
-        enhancedError._resolve = async () => {
-          await update.workspace?.(
-            "resolvedErrors",
-            resolved.concat([error.id])
-          );
+        enhancedError._fix = async () => {
+          await clean();
+          await update.workspace?.("fixedErrors", fixed.concat([error.id]));
         };
 
         enhancedError._skip = async () => {
-          console.log({ skipped, error });
+          await clean();
           await update.workspace?.("skippedErrors", skipped.concat([error.id]));
         };
 
         if (skipped?.includes(error.id)) {
           enhancedError._status = "skipped";
           all.skipped.push(enhancedError);
-        } else if (resolved?.includes(error.id)) {
-          enhancedError._status = "resolved";
-          all.resolved.push(enhancedError);
+        } else if (fixed?.includes(error.id)) {
+          enhancedError._status = "fixed";
+          all.fixed.push(enhancedError);
         } else {
           enhancedError._status = "open";
           all.open.push(enhancedError);
         }
         return all;
       },
-      { open: [], skipped: [], resolved: [] }
+      { open: [], skipped: [], fixed: [] }
     );
-  }, [skipped, resolved, errors]);
+  }, [skipped, fixed, errors]);
 
   useEffect(() => {
     loadErrors({ projects, filters });

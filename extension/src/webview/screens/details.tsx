@@ -2,13 +2,25 @@ import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { ErrorDetails } from "../types/bugsnag";
-import { useSettings } from "../hooks/settings";
-import { useBugsnagErrors } from "../hooks/bugsnag";
+import { useSettings } from "../hooks/use-settings";
+import { useBugnsagOrganisation } from "../hooks/bugsnag/use-bugsnag-organisation";
+import { useBugsnagErrors } from "../hooks/bugsnag/use-bugsnag-errors";
 import { Header } from "../components/header";
 import { LoadingMessage } from "../components/loading-message";
 import { Spacer } from "../components/spacer";
 import { Button } from "../components/button";
 import { ErrorSummary } from "../components/error-summary";
+
+const Sticky = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 25px;
+  margin: 0 -20px;
+  padding: 0 20px 10px;
+  background: var(--vscode-sideBar-background);
+  z-index: 20;
+`;
 
 const Label = styled.span`
   font-size: 8px;
@@ -45,7 +57,7 @@ const WrapActions = styled.div`
 const TITLES = {
   open: "open errors",
   skipped: "skipped errors",
-  resolved: "resolved errors",
+  fixed: "fixed errors",
 };
 
 export function DetailsScreen() {
@@ -67,10 +79,28 @@ export function DetailsScreen() {
   const data = list[index];
   const nextData = nextIndex !== index ? list[nextIndex] : undefined;
 
+  const token = settings?.workspace?.projects?.find?.(
+    (p) => p.id === data?.project_id
+  )?.token;
+
+  const { organisation } = useBugnsagOrganisation({ token });
+  const project = organisation.projects?.find?.(
+    (p) => p.id === data?.project_id
+  );
+
+  const externalLink = project?.html_url
+    ? `${project.html_url}/errors/${data.id}`
+    : undefined;
+
   if (loading) {
     return (
       <>
-        <Header backTo="/" title="Error details" />
+        <Header
+          backTo="/"
+          title="Error details"
+          externalLink={externalLink}
+          externalTitle="Open in Bugsnag"
+        />
         <LoadingMessage message="Loading error details from bugsnag..." />
       </>
     );
@@ -78,52 +108,59 @@ export function DetailsScreen() {
 
   return (
     <>
-      <Header backTo="/" title="Error details" />
+      <Header
+        backTo="/"
+        title="Error details"
+        externalLink={externalLink}
+        externalTitle="Open in Bugsnag"
+      />
 
-      <Spacer height="6px" />
-      <Label>
-        {list.length} {TITLES[listId as keyof typeof TITLES] || "items"} left
-      </Label>
+      <Sticky>
+        <Spacer height="6px" />
+        <Label>
+          {list.length} {TITLES[listId as keyof typeof TITLES] || "items"} left
+        </Label>
 
-      <Spacer height="2px" />
-      <WrapActions>
-        {data?._status !== "skipped" && (
-          <Button
-            secondary
-            onClick={async () => {
-              await data._skip();
-              navigate(nextData?.id ? `/details/${nextData?.id}` : "/");
-            }}
-          >
-            Skip
-          </Button>
-        )}
+        <Spacer height="2px" />
+        <WrapActions>
+          {data?._status !== "skipped" && (
+            <Button
+              secondary
+              onClick={async () => {
+                await data._skip();
+                navigate(nextData?.id ? `/details/${nextData?.id}` : "/");
+              }}
+            >
+              Skip
+            </Button>
+          )}
 
-        {data?._status !== "open" && (
-          <Button
-            secondary
-            onClick={async () => {
-              await data._open();
-              navigate(nextData?.id ? `/details/${nextData?.id}` : "/");
-            }}
-          >
-            Open
-          </Button>
-        )}
+          {data?._status !== "open" && (
+            <Button
+              secondary
+              onClick={async () => {
+                await data._open();
+                navigate(nextData?.id ? `/details/${nextData?.id}` : "/");
+              }}
+            >
+              Open
+            </Button>
+          )}
 
-        {data?._status !== "resolved" && (
-          <Button
-            onClick={async () => {
-              await data._resolve();
-              navigate(nextData?.id ? `/details/${nextData?.id}` : "/");
-            }}
-          >
-            Resolve
-          </Button>
-        )}
-      </WrapActions>
+          {data?._status !== "fixed" && (
+            <Button
+              onClick={async () => {
+                await data._fix();
+                navigate(nextData?.id ? `/details/${nextData?.id}` : "/");
+              }}
+            >
+              Fixed
+            </Button>
+          )}
+        </WrapActions>
+      </Sticky>
 
-      <Spacer height="18px" />
+      <Spacer height="10px" />
       <Title>
         <b>{data?.error_class}</b>
         <span>{data?.context}</span>
@@ -133,7 +170,7 @@ export function DetailsScreen() {
       <Message>{data?.message}</Message>
 
       <Spacer height="18px" />
-      <ErrorSummary data={data} />
+      <ErrorSummary token={token!} data={data} />
     </>
   );
 }

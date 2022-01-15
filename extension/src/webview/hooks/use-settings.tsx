@@ -25,7 +25,7 @@ type Settings = {
     };
     activeTab?: string;
     skippedErrors?: string[];
-    resolvedErrors?: string[];
+    fixedErrors?: string[];
   };
 };
 

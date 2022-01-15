@@ -13,13 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run tests and linter
-        working-directory: ./extension
-        run: |-
-          yarn
-          yarn lint --quiet
-          yarn typecheck
-
       - name: Get version from package.json
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
@@ -34,11 +27,26 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Run tests and linter
+        working-directory: ./extension
+        run: |-
+          yarn
+          yarn lint --quiet
+          yarn typecheck
+
+      - name: Create env.ts file
+        working-directory: ./extension
+        run: |-
+          echo 'export const API_BASE_URL = "http://localhost:3000";' > src/env.ts
+
       - name: Publish extension to marketplace if version changed
         if: ${{ steps.check-tag.outputs.exists == 'false' }}
         working-directory: ./extension
         run: |-
-          VSCE_PAT=${{ secrets.AZURE_ACCESS_TOKEN }} yarn release
+          yarn release
+        env:
+          API_BASE_URL: https://vscode-bugsnag-stepthrough.vercel.app
+          VSCE_PAT: ${{ secrets.AZURE_ACCESS_TOKEN }}
 
       - name: Create tag for version if it is new
         if: ${{ steps.check-tag.outputs.exists == 'false' }}

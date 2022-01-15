@@ -10,7 +10,7 @@ export default async function handler(
 
   const { id, ...query } = req.query;
   const { response, json } = await forwardToBugsnag(
-    `/organizations/${id}/projects`,
+    `/errors/${id}/latest_event`,
     query
   );
 

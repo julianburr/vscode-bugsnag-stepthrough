@@ -5,7 +5,6 @@ export const getSettings = {
   name: "getSettings",
   handler: ({ context }: ActionArgs) => {
     const { globalState, workspaceState } = context;
-    console.log({ keys: globalState.keys() });
 
     // Get all global settings
     const global = globalState.keys().reduce<any>((all, key) => {
