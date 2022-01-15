@@ -3,7 +3,7 @@ name: Run PR Checks
 on: "pull_request"
 
 jobs:
-  deploy_staging:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
