@@ -1,13 +1,10 @@
 import { ExtensionContext, Uri, Webview } from "vscode";
 
 import { handleMessage, registerAction } from "./actions";
+import { confirm } from "./actions/confirm";
 import { getSettings } from "./actions/get-settings";
-import { addToken } from "./actions/add-token";
-import { removeToken } from "./actions/remove-token";
-import { addProject } from "./actions/add-project";
-import { removeProject } from "./actions/remove-project";
 import { openFile } from "./actions/open-file";
-import { FILTERS_KEY, PROJECTS_KEY, TOKENS_KEY } from "./constants";
+import { updateSetting } from "./actions/update-setting";
 
 type CreateWebviewOptions = {
   entryScript: string;
@@ -45,17 +42,11 @@ export function createWebview(
     </html>
   `;
 
-  context.globalState.update(TOKENS_KEY, []);
-  context.workspaceState.update(PROJECTS_KEY, []);
-  context.workspaceState.update(FILTERS_KEY, {});
-
   // Actions for communication between extension and webview
   registerAction(getSettings);
-  registerAction(addToken);
-  registerAction(removeToken);
-  registerAction(addProject);
-  registerAction(removeProject);
+  registerAction(updateSetting);
   registerAction(openFile);
+  registerAction(confirm);
 
   webview.onDidReceiveMessage((message) => {
     handleMessage({ message, context, webview });

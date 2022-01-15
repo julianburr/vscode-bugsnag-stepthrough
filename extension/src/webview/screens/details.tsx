@@ -1,54 +1,139 @@
-import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { sendMessage } from "../utils/vscode";
+import { useParams, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+import { ErrorDetails } from "../types/bugsnag";
+import { useSettings } from "../hooks/settings";
+import { useBugsnagErrors } from "../hooks/bugsnag";
+import { Header } from "../components/header";
+import { LoadingMessage } from "../components/loading-message";
+import { Spacer } from "../components/spacer";
+import { Button } from "../components/button";
+import { ErrorSummary } from "../components/error-summary";
+
+const Label = styled.span`
+  font-size: 8px;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin: 0 0 2px;
+`;
+
+const Title = styled.h1`
+  font-size: 18px;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+
+  & b {
+    font-weight: bold;
+    padding: 0 8px 0 0;
+  }
+`;
+
+const Message = styled.p`
+  font-size: 16px;
+  opacity: 0.7;
+  margin: 4px 0;
+  padding: 0;
+`;
+
+const WrapActions = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+`;
+
+const TITLES = {
+  open: "open errors",
+  skipped: "skipped errors",
+  resolved: "resolved errors",
+};
 
 export function DetailsScreen() {
+  const navigate = useNavigate();
   const { id } = useParams();
-  useEffect(() => {
-    console.log({ id });
-  }, [id]);
+  const { settings } = useSettings();
+
+  const listId = settings?.workspace.activeTab || "open";
+
+  const { errors, loading } = useBugsnagErrors({
+    projects: settings!.workspace.projects!,
+    filters: settings!.workspace.filters!,
+  });
+
+  const list: ErrorDetails[] = (errors as any)[listId];
+  const index = list.findIndex((e) => e.id === id);
+  const nextIndex = index + 1 >= list.length ? 0 : index + 1;
+
+  const data = list[index];
+  const nextData = nextIndex !== index ? list[nextIndex] : undefined;
+
+  if (loading) {
+    return (
+      <>
+        <Header backTo="/" title="Error details" />
+        <LoadingMessage message="Loading error details from bugsnag..." />
+      </>
+    );
+  }
 
   return (
     <>
-      <h1>Error #{id} Details</h1>
-      <p>
-        <Link to={`/?from=${id}`}>Back to overview</Link>
-      </p>
+      <Header backTo="/" title="Error details" />
 
-      <p>
-        <button>Mark as fixed</button>
-        <button>Skip</button>
-      </p>
+      <Spacer height="6px" />
+      <Label>
+        {list.length} {TITLES[listId as keyof typeof TITLES] || "items"} left
+      </Label>
 
-      <p>x errors left</p>
+      <Spacer height="2px" />
+      <WrapActions>
+        {data?._status !== "skipped" && (
+          <Button
+            secondary
+            onClick={async () => {
+              await data._skip();
+              navigate(nextData?.id ? `/details/${nextData?.id}` : "/");
+            }}
+          >
+            Skip
+          </Button>
+        )}
 
-      <p>
-        <button
-          onClick={() =>
-            sendMessage("openFile", {
-              data: {
-                filePath: "..",
-                line: 9,
-                column: 4,
-              },
-            })
-          }
-        >
-          Open file
-        </button>
-      </p>
+        {data?._status !== "open" && (
+          <Button
+            secondary
+            onClick={async () => {
+              await data._open();
+              navigate(nextData?.id ? `/details/${nextData?.id}` : "/");
+            }}
+          >
+            Open
+          </Button>
+        )}
 
-      <p>Error details...</p>
+        {data?._status !== "resolved" && (
+          <Button
+            onClick={async () => {
+              await data._resolve();
+              navigate(nextData?.id ? `/details/${nextData?.id}` : "/");
+            }}
+          >
+            Resolve
+          </Button>
+        )}
+      </WrapActions>
 
-      <p>
-        <a
-          target="_blank"
-          href="https://www.google.com"
-          rel="noreferrer nofollow"
-        >
-          Google
-        </a>
-      </p>
+      <Spacer height="18px" />
+      <Title>
+        <b>{data?.error_class}</b>
+        <span>{data?.context}</span>
+      </Title>
+
+      <Spacer height="3px" />
+      <Message>{data?.message}</Message>
+
+      <Spacer height="18px" />
+      <ErrorSummary data={data} />
     </>
   );
 }

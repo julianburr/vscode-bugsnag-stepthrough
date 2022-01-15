@@ -31,15 +31,17 @@
     "vscode:prepublish": "yarn build",
     "build": "yarn extension:build --minify && yarn webviews:build --splitting --minify",
     "dev": "stmux --title \"bugsnag-stepthrough\" --mouse --wait error --error ERROR --method beep,system -- [ [ -t \"[extension]   Hit 'ctrl+a ?' for help. \" \"yarn extension:dev\" ] : [ -t \"[webviews]   Hit 'ctrl+a ?' for help. \" \"yarn webviews:dev\" ] ]",
-    "extension:build": "esbuild ./src/extension/index.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+    "extension:build": "node ./esbuild.extension.js",
     "extension:dev": "yarn extension:build --sourcemap --watch",
-    "webviews:build": "esbuild ./src/webview/*.tsx --bundle --outdir=out/webview --format=esm",
-    "webviews:dev": "yarn webviews:build --watch",
+    "webviews:build": "node ./esbuild.webview.js",
+    "webviews:dev": "yarn webviews:build --sourcemap --watch",
     "typecheck": "tsc -p ./",
     "lint": "eslint .",
     "release": "vsce package && vsce publish --yarn"
   },
   "dependencies": {
+    "classnames": "^2.3.1",
+    "dayjs": "^1.10.7",
     "react": "^17.0.2",
     "react-cool-form": "^0.4.1",
     "react-dom": "^17.0.2",
@@ -48,26 +50,31 @@
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "@types/classnames": "^2.3.1",
     "@types/node": "^16.10.2",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@types/react-router-dom": "^5.3.2",
+    "@types/styled-components": "^5.1.20",
     "@types/vscode": "^1.63.1",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
     "@typescript-eslint/parser": "^5.9.1",
     "esbuild": "^0.14.11",
+    "esbuild-plugin-svgr": "^1.0.0",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "glob": "^7.2.0",
     "node-fetch": "^3.1.0",
     "prettier": "^2.5.1",
     "stmux": "^1.8.3",
     "typescript": "^4.5.4",
     "vsce": "^2.6.3",
-    "vscode": "^1.1.37"
+    "vscode": "^1.1.37",
+    "yargs": "^17.3.1"
   },
   "activationEvents": [
     "onStartupFinished"

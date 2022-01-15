@@ -1,17 +1,45 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useForm } from "react-cool-form";
+
+import { IntroScreen } from "./intro";
+
 import { useSettings } from "../hooks/settings";
+import { useBugsnagErrors } from "../hooks/bugsnag";
+import { Header } from "../components/header";
+import { Select } from "../components/select";
+import { Spacer } from "../components/spacer";
+import { Hr } from "../components/hr";
+import { OverviewStats } from "../components/overview-stats";
+import { OverviewList } from "../components/overview-list";
+import { EmptyMessage } from "../components/empty-message";
+import { LoadingMessage } from "../components/loading-message";
 
 export function OverviewScreen() {
-  const { settings } = useSettings();
+  const { settings, update } = useSettings();
+
+  const { form, use } = useForm({
+    defaultValues: {
+      since: settings?.workspace.filters?.since || "1d",
+      sort: settings?.workspace.filters?.sort || "users",
+    },
+  });
+
+  const values = use("values");
+  useEffect(() => {
+    update.workspace?.("filters", values);
+  }, [values]);
+
+  const { loading, errors } = useBugsnagErrors({
+    projects: settings?.workspace.projects || [],
+    filters: values,
+  });
 
   if (!settings?.global?.tokens?.length) {
     // Show message if no global tokens have been set yet
     return (
-      <>
-        <p>You are not connected to any Bugsnag accounts yet.</p>
-        <Link to="/settings">Go to settings</Link>
-      </>
+      <IntroScreen
+        message={<p>You are not connected to any Bugsnag accounts yet.</p>}
+      />
     );
   }
 
@@ -19,58 +47,81 @@ export function OverviewScreen() {
     // Show message if no projects have been selected for the current
     // workspace yet
     return (
-      <>
-        <p>You have not selected any projects for this workspace yet.</p>
-        <Link to="/settings">Go to settings</Link>
-      </>
+      <IntroScreen
+        message={
+          <p>You have not selected any projects for this workspace yet.</p>
+        }
+      />
     );
   }
 
+  const totalErrors =
+    errors?.open?.length + errors?.skipped?.length + errors?.resolved?.length;
+
   return (
     <>
-      <h1>Overview</h1>
-      <p>
-        <Link to="/settings">Settings</Link>
-      </p>
+      <Header title="Overview" settingsLink />
 
-      <p>
-        <label>Show errors from</label>
-        <select name="timeframe">
-          <option value="today">Today</option>
-          <option value="week">This week</option>
-          <option value="month">This month</option>
-        </select>
-      </p>
+      <form ref={form}>
+        <Select
+          name="since"
+          label="Show errors from"
+          items={[
+            { label: "Today", value: "1d" },
+            { label: "This week", value: "7d" },
+            { label: "This month", value: "30d" },
+          ]}
+        />
+        <Spacer height="4px" />
+        <Select
+          name="sort"
+          label="Sort errors by"
+          items={[
+            { label: "Affected users", value: "users" },
+            { label: "Instances", value: "events" },
+            { label: "Last seen", value: "last_seen" },
+          ]}
+        />
+      </form>
 
-      <p>
-        <label>Sort errors by</label>
-        <select name="sort">
-          <option value="instances"># of instances</option>
-          <option value="users"># of affected users</option>
-          <option value="lastseen">Most recently seen</option>
-        </select>
-      </p>
+      <Spacer height="20px" />
+      <Hr />
+      <Spacer height="15px" />
 
-      <p>
-        33 errors
-        <br />
-        12 skipped errors
-        <br />8 marked as resolved
-      </p>
+      {loading ? (
+        <>
+          <Spacer height="20px" />
+          <LoadingMessage message="Loading errors from bugsnag..." />
+        </>
+      ) : (
+        <>
+          <OverviewStats
+            open={errors.open.length}
+            skipped={errors.skipped.length}
+            resolved={errors.resolved.length}
+            active={settings.workspace.activeTab || "open"}
+            onClick={(tab) => update.workspace?.("activeTab", tab)}
+          />
 
-      <p>
-        <Link to="/details/1">Start stepthrough</Link>
-      </p>
-      <p>
-        or click on any of the errors below to start the stepthrough from that
-        particular item
-      </p>
+          <Spacer height="30px" />
 
-      <ul>
-        <li>
-          <Link to="/details/1">Example Error #1</Link>
-        </li>
-      </ul>
+          {totalErrors === 0 ? (
+            <>
+              <Spacer height="25px" />
+              <EmptyMessage />
+            </>
+          ) : (
+            <OverviewList
+              errors={
+                errors[
+                  (settings.workspace.activeTab ||
+                    "open") as keyof typeof errors
+                ]
+              }
+            />
+          )}
+        </>
+      )}
     </>
   );
 }

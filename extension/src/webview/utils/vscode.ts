@@ -29,14 +29,14 @@ export function sendMessage(
   command: string,
   { data, timeout = 10000 }: SendMessageOptions = {}
 ): Promise<Message> {
+  console.log("sendMessage", { command, data });
   return new Promise((resolve, reject) => {
-    const handleMessage = (message: {
-      data: { command: string; data: any };
-    }) => {
-      if (message.data.command === `${command}Response`) {
+    const handleMessage = (e: { data: { command: string; data: any } }) => {
+      if (e.data.command === `${command}Response`) {
         clearTimeout(timer);
         window.removeEventListener("message", handleMessage);
-        resolve(message.data);
+        console.log("sendMessage response", { message: e.data });
+        resolve(e.data);
       }
     };
     window.addEventListener("message", handleMessage);
@@ -46,7 +46,27 @@ export function sendMessage(
     // within the specified timeout
     timer = setTimeout(() => {
       window.removeEventListener("message", handleMessage);
-      reject(new Error(`Command timed out after ${timeout}ms`));
+      reject(new Error(`Command "${command}" timed out after ${timeout}ms`));
     }, 10000);
   });
+}
+
+type OpenFileArgs = {
+  filePath: string;
+  line?: number;
+  column?: number;
+};
+
+export function openFile(data: OpenFileArgs) {
+  return sendMessage("openFile", { data });
+}
+
+type ConfirmArgs = {
+  message: string;
+  options?: string[];
+};
+
+export async function confirm(data: ConfirmArgs) {
+  const { data: answer } = await sendMessage("confirm", { data });
+  return answer;
 }

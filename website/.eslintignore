@@ -1,4 +1,1 @@
-node_modules
-public
-.cache
-api/_build
+.next
