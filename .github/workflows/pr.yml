@@ -1,0 +1,28 @@
+name: Run PR Checks
+
+on: "pull_request"
+
+jobs:
+  deploy_staging:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+
+      - name: Run tests and linter in extension dir
+        working-directory: ./extension
+        run: |-
+          yarn
+          yarn lint --quiet
+          yarn typecheck
+
+      - name: Run tests and linter in website dir
+        working-directory: ./website
+        run: |-
+          yarn
+          yarn lint --quiet
+          yarn typecheck

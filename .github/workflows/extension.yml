@@ -1,0 +1,48 @@
+name: Publish Extension
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - extension/**
+
+jobs:
+  deploy_extension:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run tests and linter
+        working-directory: ./extension
+        run: |-
+          yarn
+          yarn lint --quiet
+          yarn typecheck
+
+      - name: Get version from package.json
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
+        with:
+          path: ./extension
+
+      - name: Check if tag for this version already exists
+        uses: mukunku/tag-exists-action@v1.0.0
+        id: check-tag
+        with:
+          tag: "v${{ steps.package-version.outputs.current-version }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish extension to marketplace if version changed
+        if: ${{ steps.check-tag.outputs.exists == 'false' }}
+        working-directory: ./extension
+        run: |-
+          VSCE_PAT=${{ secrets.AZURE_ACCESS_TOKEN }} yarn release
+
+      - name: Create tag for version if it is new
+        if: ${{ steps.check-tag.outputs.exists == 'false' }}
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: "v${{ steps.package-version.outputs.current-version }}"
+          message: "Release v${{ steps.package-version.outputs.current-version }}"
