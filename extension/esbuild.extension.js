@@ -7,6 +7,7 @@ const argv = yargs(process.argv).argv;
 
 const options = {
   bundle: true,
+  minify: !argv.watch,
   entryPoints: ["./src/extension/index.ts"],
   outfile: "./out/extension.js",
   format: "cjs",

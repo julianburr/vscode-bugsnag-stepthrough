@@ -15,22 +15,39 @@ const Container = styled.footer`
 
 const Content = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
   align-items: center;
   justify-content: center;
+
+  @media (min-width: 850px) {
+    flex-direction: row;
+  }
 `;
 
 const Social = styled.div`
   display: flex;
   flex-direction: row;
+  margin: 0 0 0.8rem;
+
+  @media (min-width: 850px) {
+    margin: 0;
+  }
 
   a {
     display: flex;
-    padding: 0.6rem;
+    padding: 1rem;
 
     svg {
-      height: 1.3em;
+      height: 2em;
       width: auto;
+    }
+
+    @media (min-width: 850px) {
+      padding: 0.6rem;
+
+      svg {
+        height: 1.3em;
+      }
     }
   }
 `;

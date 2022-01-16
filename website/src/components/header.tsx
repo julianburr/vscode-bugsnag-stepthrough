@@ -8,8 +8,10 @@ import heroWebp from "src/assets/images/hero.webp";
 
 import GithubSvg from "src/assets/icons/github.svg";
 import TwitterSvg from "src/assets/icons/twitter.svg";
+import BugsnagSvg from "src/assets/icons/bugsnag.svg";
 
 import { Inner } from "./inner";
+import { VSCodeMock } from "./mock/vscode";
 
 const wiggle = keyframes`
   0% {
@@ -85,8 +87,8 @@ const Container = styled.header`
   background: var(--color-primary-500-background);
   background: linear-gradient(
     197deg,
-    var(--color-primary-500-background) 0%,
-    var(--color-primary-400-background) 100%
+    var(--color-hero-light-background) 0%,
+    var(--color-hero-dark-background) 100%
   );
   color: var(--color-primary-500-foreground);
   overflow: hidden;
@@ -105,8 +107,8 @@ const Message = styled.div`
     margin: 0 auto;
     padding: 1.2rem 1.8rem;
     font-family: Quicksand;
-    background: var(--color-primary-700-background);
-    color: var(--color-primary-700-foreground);
+    background: var(--color-message-background);
+    color: var(--color-message-foreground);
     border-radius: 0.4rem;
     text-align: center;
     z-index: 2;
@@ -190,7 +192,7 @@ const OutlineLink = styled.a`
   width: 19rem;
   font: inherit;
   font-size: 1.6rem;
-  color: var(--color-primary-400-background);
+  color: var(--color-outline-button-foreground);
   border: 0.2rem solid currentColor;
   border-radius: 0.4rem;
   text-decoration: none;
@@ -199,7 +201,7 @@ const OutlineLink = styled.a`
   &:hover,
   &:focus {
     text-decoration: none;
-    color: var(--color-primary-600-background);
+    color: var(--color-outline-button-hover-foreground);
   }
 
   & svg {
@@ -209,9 +211,22 @@ const OutlineLink = styled.a`
   }
 `;
 
+const WrapMock = styled.div`
+  position: absolute;
+  top: -2rem;
+  left: calc(50% + 19.5rem);
+  z-index: 1;
+  transform: rotate(8.5deg) translate3d(0, 0, 0) scale(0.95);
+  display: none;
+
+  @media (min-width: 850px) {
+    display: flex;
+  }
+`;
+
 const Hero = styled.div`
   position: absolute;
-  top: 15rem;
+  top: 3rem;
   left: calc(50% + 20.5rem);
   height: 50rem;
   z-index: 1;
@@ -253,6 +268,22 @@ const WrapButtons = styled.div`
   }
 `;
 
+const Logo = styled(BugsnagSvg)`
+  position: absolute;
+  width: auto;
+  color: var(--color-message-background);
+  opacity: 0.1;
+  top: 12rem;
+  left: calc(50% - 40rem);
+  height: 60rem;
+
+  @media (min-width: 850px) {
+    top: 3rem;
+    left: calc(50% - 80rem);
+    height: 70rem;
+  }
+`;
+
 export function Header() {
   const twitterText =
     "Finally! The VS Code Bugsnag Extension (that nobody asked for) 😅🚀";
@@ -262,6 +293,8 @@ export function Header() {
   return (
     <>
       <Container>
+        <Logo />
+
         <Message id="unofficial">
           <p>
             Please note that this is <u>not</u> an official Bugsnag product. I
@@ -292,16 +325,9 @@ export function Header() {
             </Button>
           </WrapContent>
 
-          <Hero>
-            <picture>
-              <source srcSet={heroWebp.src} type="image/webp" />
-              <source srcSet={heroPng.src} type="image/png" />
-              <img
-                src={heroPng.src}
-                alt="Screenshot of the VS Code Extension"
-              />
-            </picture>
-          </Hero>
+          <WrapMock role="presentation">
+            <VSCodeMock />
+          </WrapMock>
         </Inner>
       </Container>
 

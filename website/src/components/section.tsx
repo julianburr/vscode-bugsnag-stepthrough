@@ -8,6 +8,11 @@ export const Section = styled.section<{ reverse?: boolean; stacked?: boolean }>`
   background: var(--color-main-background);
   color: var(--color-main-foreground);
   text-align: center;
+  overflow: hidden;
+
+  &:first-child {
+    overflow: visible;
+  }
 
   p {
     margin: 1.2rem 0;

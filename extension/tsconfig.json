@@ -15,6 +15,12 @@
     "incremental": true,
     "baseUrl": "."
   },
-  "include": ["**/*.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "*.d.ts",
+    "**/*.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/webview/index.tsx"
+  ],
   "exclude": ["node_modules"]
 }

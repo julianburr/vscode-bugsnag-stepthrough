@@ -20,8 +20,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: .github/actions/custom-actions
 
+      - name: Use node modules from cache if available
+        uses: ./.github/actions/custom-actions/cache-node-modules
+
       - name: Install dependencies
-        working-directory: ./website
         run: |-
           yarn
 

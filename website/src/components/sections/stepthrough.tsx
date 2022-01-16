@@ -12,7 +12,9 @@ export function StepthroughSection() {
           <h2>Simple stepthrough functionality</h2>
           <p>
             Easily go through all your open issues one by, directly in your IDE,
-            and see all the info that might help you fix the issue.
+            and see all the info that might help you fix the issue. If you use
+            sourcemaps, the extension will automatically open the relevant files
+            as to go through the errors 🚀
           </p>
         </SectionContent>
         <SectionImage>

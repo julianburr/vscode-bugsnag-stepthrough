@@ -14,6 +14,7 @@ const entryPoints = glob
 
 const options = {
   bundle: true,
+  minify: !argv.watch,
   entryPoints: entryPoints,
   outdir: "out/webview",
   format: "esm",
