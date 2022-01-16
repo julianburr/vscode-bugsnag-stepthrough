@@ -22,6 +22,11 @@ export const List = styled.ul`
       position: relative;
       word-wrap: break-word;
 
+      &:hover,
+      &:focus {
+        color: inherit;
+      }
+
       & > * {
         position: relative;
         z-index: 1;
@@ -44,14 +49,16 @@ export const List = styled.ul`
 `;
 
 export const Title = styled.h2`
-  margin: 0 0 2px;
-  padding: 0;
-  font-size: 12px;
-  font-weight: normal;
+  && {
+    margin: 0 0 2px;
+    padding: 0;
+    font-size: 12px;
+    font-weight: normal;
 
-  b {
-    font-weight: bold;
-    padding-right: 6px;
+    b {
+      font-weight: bold;
+      padding-right: 6px;
+    }
   }
 `;
 

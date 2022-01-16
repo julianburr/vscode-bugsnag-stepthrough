@@ -20,7 +20,7 @@ const Sticky = styled.div`
   display: flex;
   flex-direction: column;
   position: sticky;
-  top: 25px;
+  top: 27px;
   margin: 0 -20px;
   padding: 0 20px 10px;
   background: var(--vscode-sideBar-background);
@@ -35,14 +35,16 @@ const Label = styled.span`
 `;
 
 const Title = styled.h1`
-  font-size: 18px;
-  font-weight: normal;
-  margin: 0;
-  padding: 0;
+  && {
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
 
-  & b {
-    font-weight: bold;
-    padding: 0 8px 0 0;
+    & b {
+      font-weight: bold;
+      padding: 0 8px 0 0;
+    }
   }
 `;
 
@@ -116,7 +118,7 @@ export function DetailsScreen() {
       all = all.concat(account.projects);
       return all;
     }, [])
-    .find((project) => project.id === data.project_id);
+    .find((project) => project.id === data?.project_id);
 
   const externalLink =
     data && project?.html_url

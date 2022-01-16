@@ -1,5 +1,6 @@
 {
-  "website/**/*.{js,ts,tsx}": "yarn --cwd ./website lint --fix",
-  "extension/**/*.{js,ts,tsx}": "yarn --cwd ./extension lint --fix",
+  "components/**/*.{js,ts,tsx}": "yarn --cwd ./extension lint --fix --quiet",
+  "website/**/*.{js,ts,tsx}": "yarn --cwd ./website lint --fix --quiet",
+  "extension/**/*.{js,ts,tsx}": "yarn --cwd ./extension lint --fix --quiet",
   "**/*.{md,json,yml}": "prettier --write"
 }

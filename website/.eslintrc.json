@@ -11,6 +11,14 @@
     "react/react-in-jsx-scope": "off",
     "react/no-unescaped-entities": "warn"
   },
+  "overrides": [
+    {
+      "files": ["next.config.js"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ],
   "settings": {
     "react": {
       "version": "detect"

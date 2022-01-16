@@ -5,13 +5,13 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
   height: 2.8rem;
-  background: var(--vscode-topbar-background);
-  padding: 0 0.6rem;
+  background: var(--mock-vscode-topbar-background);
+  padding: 0 1rem;
 `;
 
 const TopBarButton = styled.button<{ color: string }>`
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.2rem;
+  height: 1.2rem;
   margin: 0 0.8rem 0 0;
   background: ${(props) => props.color};
   border-radius: 50%;
@@ -22,10 +22,14 @@ const TopBarButton = styled.button<{ color: string }>`
   }
 `;
 
-export function TopBar() {
+type TopBarProps = {
+  onClose?: () => void;
+};
+
+export function TopBar({ onClose }: TopBarProps) {
   return (
     <Container>
-      <TopBarButton color="#fe5f57" />
+      <TopBarButton color="#fe5f57" onClick={onClose} />
       <TopBarButton color="#febc2e" />
       <TopBarButton color="#29c940" />
     </Container>

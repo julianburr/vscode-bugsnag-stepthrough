@@ -56,9 +56,7 @@ export function AccountDetails({ token }: AccountDetailsProps) {
 
   const [loading, setLoading] = useState(!account);
   useEffect(() => {
-    console.log({ token });
     if (token) {
-      console.log({ loadAccount });
       loadAccount?.({ token })
         .then(() => {
           setLoading(false);
@@ -79,7 +77,6 @@ export function AccountDetails({ token }: AccountDetailsProps) {
           `This setting is stored across your workspaces. ` +
           `Do you really want to remove this token?`,
       });
-      console.log({ answer });
 
       if (answer?.data !== "Yes") {
         return;

@@ -61,7 +61,6 @@ export function BugsnagProvider(props: BugsnagProviderProps) {
           return errors;
         }
 
-        console.log({ projects, filters });
         const data = await getGroupedErrors({
           projects,
           filters,

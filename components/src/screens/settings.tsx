@@ -84,9 +84,7 @@ export function SettingsScreen() {
 
       {settings?.global?.tokens && settings.global.tokens.length > 0 && (
         <>
-          <Spacer height="20px" />
-          <Hr />
-          <Spacer height="16px" />
+          <Spacer height="35px" />
           <p>
             Select the projects below that you want to associate with the
             current workspace.

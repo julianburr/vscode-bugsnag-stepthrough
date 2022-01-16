@@ -39,7 +39,7 @@ export function ErrorSummary({ token, data }: ErrorSummaryProps) {
         .catch((e) => {
           // TODO: add error handling
           // https://github.com/julianburr/vscode-bugsnag-stepthrough/issues/5
-          console.log(e);
+          console.error(e);
           setLoading(false);
         });
     }
@@ -112,26 +112,37 @@ export function ErrorSummary({ token, data }: ErrorSummaryProps) {
 
       <Spacer height="10px" />
       <Label>Events</Label>
-      <Value>{data?.events}</Value>
+      <Value>{data?.events || "—"}</Value>
 
       <Spacer height="10px" />
       <Label>Users</Label>
-      <Value>{data?.users}</Value>
+      <Value>{data?.users || "—"}</Value>
 
       <Spacer height="10px" />
       <Label>Release Stages</Label>
-      <Value>{data?.release_stages?.join?.(",")}</Value>
+      <Value>{data?.release_stages?.join?.(",") || "—"}</Value>
 
-      <Spacer height="10px" />
-      <Label>Stacktrace</Label>
-      <StacktraceList items={eventData?.exceptions?.[0]?.stacktrace || []} />
+      {eventData?.exceptions?.[0]?.stacktrace &&
+        eventData.exceptions[0].stacktrace.length > 0 && (
+          <>
+            <Spacer height="10px" />
+            <Label>Stacktrace</Label>
+            <StacktraceList
+              items={eventData?.exceptions?.[0]?.stacktrace || []}
+            />
+          </>
+        )}
 
-      <Spacer height="10px" />
-      <Label>Breadcrumbs</Label>
-      <BreadcrumbsList
-        items={eventData?.breadcrumbs || []}
-        eventTimestamp={eventData?.received_at}
-      />
+      {eventData?.breadcrumbs && eventData?.breadcrumbs?.length > 0 && (
+        <>
+          <Spacer height="10px" />
+          <Label>Breadcrumbs</Label>
+          <BreadcrumbsList
+            items={eventData?.breadcrumbs || []}
+            eventTimestamp={eventData?.received_at}
+          />
+        </>
+      )}
 
       <Spacer height="20px" />
     </>

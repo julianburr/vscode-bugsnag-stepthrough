@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - website/**
+      - components/**
 
 jobs:
   deploy_website:

@@ -1,21 +1,26 @@
-import { HashRouter, Routes, Route, Outlet } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
+import { MemoryRouter, Routes, Route, Outlet } from "react-router-dom";
+import styled from "styled-components";
 
 import { useVSCode } from "./src/providers/vscode";
 import { OverviewScreen } from "./src/screens/overview";
 import { DetailsScreen } from "./src/screens/details";
 import { SettingsScreen } from "./src/screens/settings";
 
-const GlobalStyles = createGlobalStyle`
-  :root {
-    --vscode-custom-input-height: 28px;
-  }
+const Container = styled.div`
+  --vscode-custom-input-height: 28px;
 
-  *, *:before, *:after {
+  line-height: 1.4;
+
+  *,
+  *:before,
+  *:after {
     box-sizing: border-box;
   }
 
-  a:focus, input:focus, select:focus, textarea:focus {
+  a:focus,
+  input:focus,
+  select:focus,
+  textarea:focus {
     outline: none;
   }
 
@@ -34,23 +39,22 @@ function Router() {
   }
 
   return (
-    <Routes>
-      <Route path="/" element={<Outlet />}>
-        <Route index element={<OverviewScreen />} />
-        <Route path="settings" element={<SettingsScreen />} />
-        <Route path="details/:id" element={<DetailsScreen />} />
-      </Route>
-    </Routes>
+    <Container>
+      <Routes>
+        <Route path="/" element={<Outlet />}>
+          <Route index element={<OverviewScreen />} />
+          <Route path="settings" element={<SettingsScreen />} />
+          <Route path="details/:id" element={<DetailsScreen />} />
+        </Route>
+      </Routes>
+    </Container>
   );
 }
 
 export function Root() {
   return (
-    <>
-      <GlobalStyles />
-      <HashRouter>
-        <Router />
-      </HashRouter>
-    </>
+    <MemoryRouter>
+      <Router />
+    </MemoryRouter>
   );
 }

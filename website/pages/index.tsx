@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import twemoji from "twemoji";
 
+import { GlobalMockStyles } from "src/components/mock/vscode";
 import { Header } from "src/components/header";
 import { GettingStartedSection } from "src/components/sections/getting-started";
 import { StepthroughSection } from "src/components/sections/stepthrough";
@@ -9,7 +10,6 @@ import { PrioritiesSection } from "src/components/sections/priorities";
 import { SkipIssuesSection } from "src/components/sections/skip-issues";
 import { FaqsSection } from "src/components/sections/faqs";
 import { Footer } from "src/components/footer";
-import { MockSection } from "src/components/sections/mock";
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -152,11 +152,12 @@ export default function Home() {
   return (
     <>
       <GlobalStyles />
+      <GlobalMockStyles />
+
       <Container>
         <Header />
 
         <Main>
-          <MockSection />
           <GettingStartedSection />
           <StepthroughSection />
           <PrioritiesSection />

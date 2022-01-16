@@ -7,8 +7,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   // Track page view events in Google Analytics
   usePageView();
 
-  console.log({ token: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS });
-
   return (
     <>
       <Head>

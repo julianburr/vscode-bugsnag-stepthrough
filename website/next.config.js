@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+
+const withPlugins = require("next-compose-plugins");
+const withTM = require("next-transpile-modules")([
+  "vscode-bugsnag-stepthrough-components",
+]);
+
+module.exports = withPlugins([withTM], {
   reactStrictMode: true,
 
   webpack: (config) => {
+    // SVG loader to turn imported SVGs into React components
     config.module.rules.push({
       test: /\.svg$/,
       use: [
@@ -23,4 +30,4 @@ module.exports = {
     });
     return config;
   },
-};
+});

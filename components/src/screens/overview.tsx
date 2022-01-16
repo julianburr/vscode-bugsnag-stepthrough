@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-cool-form";
 
 import { useVSCode } from "../providers/vscode";
@@ -6,7 +6,6 @@ import { useBugsnag } from "../providers/bugsnag";
 import { TitleBar } from "../title-bar";
 import { Select } from "../select";
 import { Spacer } from "../spacer";
-import { Hr } from "../hr";
 import { SuccessMessage } from "../message/success";
 import { LoadingMessage } from "../message/loading";
 import { IntroMessage } from "../message/intro";
@@ -89,6 +88,7 @@ export function OverviewScreen() {
         actionsRight={<IconButtonLink to="/settings" icon={<SettingsSvg />} />}
       />
 
+      <Spacer height="6px" />
       <form ref={form}>
         <Select
           name="since"
@@ -111,9 +111,7 @@ export function OverviewScreen() {
         />
       </form>
 
-      <Spacer height="20px" />
-      <Hr />
-      <Spacer height="15px" />
+      <Spacer height="35px" />
 
       {loading ? (
         <>

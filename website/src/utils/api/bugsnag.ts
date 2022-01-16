@@ -15,7 +15,6 @@ export async function forwardToBugsnag<T = any>(
   url.search = new URLSearchParams(query).toString();
 
   const response = await fetch(url.toString());
-  console.log({ response });
   try {
     const json = (await response.json()) as any;
     return {

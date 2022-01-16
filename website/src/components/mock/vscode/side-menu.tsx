@@ -14,8 +14,8 @@ const Container = styled.menu`
   display: flex;
   flex-direction: column;
   width: 5rem;
-  background: var(--vscode-sidemenu-background);
-  color: var(--vscode-sidemenu-foreground);
+  background: var(--mock-vscode-sidemenu-background);
+  color: var(--mock-vscode-sidemenu-foreground);
   margin: 0;
   padding: 0;
 
@@ -52,11 +52,11 @@ const Container = styled.menu`
       }
 
       &:hover {
-        color: var(--vscode-sidemenu-active-foreground);
+        color: var(--mock-vscode-sidemenu-active-foreground);
       }
 
       &.active {
-        color: var(--vscode-sidemenu-active-foreground);
+        color: var(--mock-vscode-sidemenu-active-foreground);
 
         &:before {
           content: " ";
@@ -65,7 +65,7 @@ const Container = styled.menu`
           bottom: 0;
           left: 0;
           width: 0.2rem;
-          background: var(--vscode-sidemenu-active-foreground);
+          background: var(--mock-vscode-sidemenu-active-foreground);
         }
       }
     }

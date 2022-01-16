@@ -2,9 +2,7 @@ import { Inner } from "../inner";
 import { Section } from "../section";
 import { SectionContent } from "../section-content";
 import { SectionImage } from "../section-image";
-import { Placeholder } from "./placeholder";
-
-import TimeSvg from "src/assets/illustrations/time.svg";
+import { Placeholder } from "../placeholder";
 
 export function GettingStartedSection() {
   return (

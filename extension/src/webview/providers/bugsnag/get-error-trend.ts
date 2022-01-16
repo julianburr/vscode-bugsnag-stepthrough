@@ -19,7 +19,6 @@ export async function getErrorTrend({
     "filters[event.since][][value]": "30d",
     buckets_count: 30,
   };
-  console.log("getTrend", { projectId, errorId, finalQuery });
   const response = await get<TrendBucket[]>(
     `/projects/${projectId}/errors/${errorId}/trend`,
     {

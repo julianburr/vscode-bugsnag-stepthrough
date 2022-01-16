@@ -8,7 +8,6 @@ type StacktraceListProps = {
 
 export function StacktraceList({ items }: StacktraceListProps) {
   const { openFile } = useVSCode();
-  console.log({ openFile });
   return (
     <List>
       {items.map((item, index) => (

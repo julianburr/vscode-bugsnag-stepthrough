@@ -93,7 +93,7 @@ export function Tabs({ open, skipped, fixed, activeTab, onChange }: TabsProps) {
       >
         <b>{open}</b> open
         <br />
-        errors
+        error{open !== 1 ? "s" : ""}
       </Errors>
       <Warnings
         className={classnames({
@@ -104,7 +104,7 @@ export function Tabs({ open, skipped, fixed, activeTab, onChange }: TabsProps) {
       >
         <b>{skipped}</b> skipped
         <br />
-        errors
+        error{skipped !== 1 ? "s" : ""}
       </Warnings>
       <Success
         className={classnames({

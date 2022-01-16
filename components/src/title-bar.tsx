@@ -23,6 +23,7 @@ const Left = styled.div`
 
 const Title = styled.h1<{ paddingLeft?: boolean }>`
   font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
   margin: 6px 0;
   padding: ${(props) => (props.paddingLeft ? "0 0 0 8px" : "0")};

@@ -3,7 +3,7 @@ import { Inner } from "../inner";
 import { Section } from "../section";
 import { SectionContent } from "../section-content";
 import { SectionImage } from "../section-image";
-import { Placeholder } from "./placeholder";
+import { Placeholder } from "../placeholder";
 
 const Image = styled(Placeholder)`
   @media (min-width: 850px) {
