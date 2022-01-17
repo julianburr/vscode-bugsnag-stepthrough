@@ -3,10 +3,10 @@ name: Deploy Website
 on:
   push:
     branches:
-      - fix/vercel-yarn-workspaces
-    # paths:
-    #   - website/**
-    #   - components/**
+      - main
+    paths:
+      - website/**
+      - components/**
 
 jobs:
   deploy_website:

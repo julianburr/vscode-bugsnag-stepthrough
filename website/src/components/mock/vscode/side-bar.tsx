@@ -55,22 +55,24 @@ const WrapContent = styled.div`
     }
   }
 
-  --vscode-settings-checkboxBackground: #ffffff;
-  --vscode-settings-checkboxBorder: #cecece;
-  --vscode-settings-dropdownBackground: #ffffff;
-  --vscode-settings-dropdownBorder: #cecece;
-  --vscode-foreground: #616161;
-  --vscode-editorIndentGuide-background: #d3d3d3;
-  --vscode-button-background: #007acc;
-  --vscode-button-foreground: #ffffff;
-  --vscode-settings-textInputBackground: #ffffff;
-  --vscode-settings-textInputForeground: #616161;
-  --vscode-settings-textInputBorder: #cecece;
-  --vscode-input-placeholderForeground: #767676;
-  --vscode-sideBar-background: #f3f3f3;
-  --vscode-button-secondaryBackground: #5f6a79;
-  --vscode-button-secondaryHoverBackground: #4c5561;
-  --vscode-button-hoverBackground: #0062a3;
+  [data-theme="light"] & {
+    --vscode-settings-checkboxBackground: #ffffff;
+    --vscode-settings-checkboxBorder: #cecece;
+    --vscode-settings-dropdownBackground: #ffffff;
+    --vscode-settings-dropdownBorder: #cecece;
+    --vscode-foreground: #616161;
+    --vscode-editorIndentGuide-background: #d3d3d3;
+    --vscode-button-background: #007acc;
+    --vscode-button-foreground: #ffffff;
+    --vscode-settings-textInputBackground: #ffffff;
+    --vscode-settings-textInputForeground: #616161;
+    --vscode-settings-textInputBorder: #cecece;
+    --vscode-input-placeholderForeground: #767676;
+    --vscode-sideBar-background: #f3f3f3;
+    --vscode-button-secondaryBackground: #5f6a79;
+    --vscode-button-secondaryHoverBackground: #4c5561;
+    --vscode-button-hoverBackground: #0062a3;
+  }
 
   [data-theme="dark"] & {
     --vscode-settings-checkboxBackground: #3c3c3c;
