@@ -3,10 +3,10 @@ name: Publish Extension
 on:
   push:
     branches:
-      - fix/ci-vsce-monorepo-issues
-    # paths:
-    #   - extension/**
-    #   - components/**
+      - main
+    paths:
+      - extension/**
+      - components/**
 
 jobs:
   deploy_extension:
