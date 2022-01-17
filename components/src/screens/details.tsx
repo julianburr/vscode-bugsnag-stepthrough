@@ -62,9 +62,9 @@ const WrapActions = styled.div`
 `;
 
 const TITLES = {
-  open: "open errors",
-  skipped: "skipped errors",
-  fixed: "fixed errors",
+  open: "open error",
+  skipped: "skipped error",
+  fixed: "fixed error",
 };
 
 export function DetailsScreen() {
@@ -197,7 +197,8 @@ export function DetailsScreen() {
       <Sticky>
         <Spacer height="6px" />
         <Label>
-          {list.length} {TITLES[listId as keyof typeof TITLES] || "items"} left
+          {list.length} {TITLES[listId as keyof typeof TITLES] || "item"}
+          {list.length !== 1 ? "s" : ""} left
         </Label>
 
         <Spacer height="2px" />
