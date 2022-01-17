@@ -38,8 +38,6 @@ export const useMock = ({
 
   const [settings, setSettings] = useState(mockSettings);
 
-  console.log({ mockTrends });
-
   return {
     vscode: {
       loading: false,

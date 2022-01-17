@@ -5,7 +5,7 @@ export function SEO() {
   const title = "VS Code Bugsnag Stepthrough";
   const desc =
     "The VS Code extension that helps you get on top of your open issues in Bugsnag";
-  const keywords = "vscode, bugsnag, extension, react";
+
   const preview = `${process.env.API_BASE_URL}${previewPng.src}`;
 
   return (
@@ -13,9 +13,9 @@ export function SEO() {
       {/* Basics */}
       <title>{title}</title>
       <meta name="description" content={desc} />
-      <meta data-react-helmet="true" name="keywords" content={keywords} />
-
+      <meta name="keywords" content="vscode, bugsnag, extension, react" />
       <link rel="icon" href={favicon.src} type="image/png" />
+
       {/* Open Graph */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={desc} />

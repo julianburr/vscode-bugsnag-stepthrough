@@ -29,7 +29,7 @@ export function ExtensionPreview({
   ...props
 }: ExtensionPreviewProps) {
   return (
-    <Container data-theme="dark" {...props}>
+    <Container data-theme="dark" role="presentation" {...props}>
       {content ? (
         <>
           {markers}

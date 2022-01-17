@@ -55,7 +55,7 @@ export function FaqsSection() {
             <a
               href="https://app.bugsnag.com/settings/my-account"
               target="_blank"
-              rel="noreferrer nofollow"
+              rel="noreferrer noopener"
             >
               account settings
             </a>
@@ -66,7 +66,7 @@ export function FaqsSection() {
             <a
               href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
               target="_blank"
-              rel="noreferrer nofollow"
+              rel="noreferrer noopener"
             >
               here
             </a>

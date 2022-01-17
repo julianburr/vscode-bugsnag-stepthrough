@@ -128,14 +128,20 @@ export function DetailsScreen() {
   const titleBar = (
     <TitleBar
       title="Error details"
-      actionsLeft={<IconButtonLink to="/" icon={<ArrowLeftSvg />} />}
+      actionsLeft={
+        <IconButtonLink
+          to="/"
+          title="Back to overview"
+          icon={<ArrowLeftSvg />}
+        />
+      }
       actionsRight={
         externalLink && (
           <a
             href={externalLink}
             target="_blank"
-            rel="noreferrer nofollow"
-            title={"Open in Bugsnag"}
+            rel="noreferrer noopener"
+            title="Open in Bugsnag"
           >
             <ExternalSvg />
           </a>

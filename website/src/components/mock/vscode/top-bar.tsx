@@ -29,9 +29,9 @@ type TopBarProps = {
 export function TopBar({ onClose }: TopBarProps) {
   return (
     <Container>
-      <TopBarButton color="#fe5f57" onClick={onClose} />
-      <TopBarButton color="#febc2e" />
-      <TopBarButton color="#29c940" />
+      <TopBarButton color="#fe5f57" onClick={onClose} aria-label="Close" />
+      <TopBarButton color="#febc2e" aria-label="Minimize" />
+      <TopBarButton color="#29c940" aria-label="Full Screen" />
     </Container>
   );
 }

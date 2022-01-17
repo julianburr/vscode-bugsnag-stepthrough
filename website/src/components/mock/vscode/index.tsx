@@ -103,7 +103,7 @@ type VSCodeMockProps = {
 export function VSCodeMock({ content }: VSCodeMockProps) {
   const [visible, setVisible] = useState(true);
   return visible ? (
-    <Container data-theme="dark">
+    <Container data-theme="dark" role="presentation">
       <TopBar onClose={() => setVisible(false)} />
       <WrapContent>
         <SideMenu />

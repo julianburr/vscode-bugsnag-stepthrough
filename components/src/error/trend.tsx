@@ -60,8 +60,6 @@ export function ErrorTrend({ token, projectId, errorId }: ErrorTrendProps) {
   const { trends, loadErrorTrend } = useBugsnag();
   const trend = errorId ? trends?.[errorId] : undefined;
 
-  console.log({ trends, trend });
-
   useEffect(() => {
     if (projectId && errorId) {
       loadErrorTrend?.({ token, projectId, errorId }).catch((e) => {
@@ -74,14 +72,11 @@ export function ErrorTrend({ token, projectId, errorId }: ErrorTrendProps) {
 
   const largestCount =
     trend?.reduce((all, t) => {
-      console.log({ t, all });
       if (t.events_count > all) {
         all = t.events_count;
       }
       return all;
     }, 0) || 0;
-
-  console.log({ largestCount });
 
   return (
     <Container>

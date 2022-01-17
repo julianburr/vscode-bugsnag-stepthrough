@@ -82,6 +82,7 @@ export function SideMenu() {
             onClick={(e) => {
               e.preventDefault();
             }}
+            aria-label="Explorer"
           >
             <FilesSvg />
           </a>
@@ -92,6 +93,7 @@ export function SideMenu() {
             onClick={(e) => {
               e.preventDefault();
             }}
+            aria-label="Search"
           >
             <SearchSvg />
           </a>
@@ -102,6 +104,7 @@ export function SideMenu() {
             onClick={(e) => {
               e.preventDefault();
             }}
+            aria-label="Source Control"
           >
             <SourceControlSvg />
           </a>
@@ -112,6 +115,7 @@ export function SideMenu() {
             onClick={(e) => {
               e.preventDefault();
             }}
+            aria-label="Run and Debug"
           >
             <DebugSvg />
           </a>
@@ -126,6 +130,7 @@ export function SideMenu() {
                 () => console.error("VS Code not available")
               );
             }}
+            aria-label="Extensions"
           >
             <ExtensionsSvg />
           </a>
@@ -137,6 +142,7 @@ export function SideMenu() {
             onClick={(e) => {
               e.preventDefault();
             }}
+            aria-label="Bugsnag Stepthrough"
           >
             <BugsnagSvg />
           </a>
@@ -149,6 +155,7 @@ export function SideMenu() {
             onClick={(e) => {
               e.preventDefault();
             }}
+            aria-label="Accounts"
           >
             <AccountSvg />
           </a>
@@ -159,6 +166,7 @@ export function SideMenu() {
             onClick={(e) => {
               e.preventDefault();
             }}
+            aria-label="Manage"
           >
             <SettingsSvg />
           </a>

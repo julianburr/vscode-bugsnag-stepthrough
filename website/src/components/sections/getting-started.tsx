@@ -17,7 +17,7 @@ export function GettingStartedSection() {
             <a
               href="https://app.bugsnag.com/settings/my-account"
               target="_blank"
-              rel="noreferrer nofollow"
+              rel="noreferrer noopener"
             >
               Bugsnag auth token
             </a>
