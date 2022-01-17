@@ -3,7 +3,7 @@ name: Deploy Website
 on:
   push:
     branches:
-      - main
+      - fix/vercel-yarn-workspaces
     paths:
       - website/**
       - components/**
@@ -38,6 +38,11 @@ jobs:
         uses: SpicyPizza/create-envfile@v1
         with:
           envkey_NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+
+      - name: Run build
+        working-directory: ./website
+        run: |-
+          yarn build
 
       - name: Deploy via Vercel
         uses: ./.github/actions/custom-actions/deploy-vercel
