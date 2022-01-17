@@ -47,6 +47,7 @@ const Value = styled.div<{ value: number }>`
     top: auto;
     transition: height 0.2s;
     height: ${(props) => `${props.value * 100}%`};
+    border-radius: 2px;
   }
 `;
 
