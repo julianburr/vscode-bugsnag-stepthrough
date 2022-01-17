@@ -13,7 +13,8 @@ export function PrioritiesSection() {
           <h2>Know your priorities</h2>
           <p>
             Choose if you want to see all issues from today, from this week or
-            from this month. Then decide what you want to sort by.
+            from this month. Then decide what you want to sort by. Step through
+            issues in the order you think is most sensible.
           </p>
         </SectionContent>
         <SectionImage>
