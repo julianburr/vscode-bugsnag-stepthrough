@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - fix/vercel-yarn-workspaces
-    paths:
-      - website/**
-      - components/**
+    # paths:
+    #   - website/**
+    #   - components/**
 
 jobs:
   deploy_website:
