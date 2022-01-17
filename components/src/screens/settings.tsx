@@ -6,7 +6,6 @@ import { TitleBar } from "../title-bar";
 import { Input } from "../text-input";
 import { Button } from "../button/core";
 import { Spacer } from "../spacer";
-import { Hr } from "../hr";
 import { IconButtonLink } from "../button/icon-link";
 import { useVSCode } from "../providers/vscode";
 import { AccountDetails } from "../account/details";
