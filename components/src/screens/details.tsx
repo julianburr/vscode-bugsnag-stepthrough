@@ -62,9 +62,9 @@ const WrapActions = styled.div`
 `;
 
 const TITLES = {
-  open: "open errors",
-  skipped: "skipped errors",
-  fixed: "fixed errors",
+  open: "open error",
+  skipped: "skipped error",
+  fixed: "fixed error",
 };
 
 export function DetailsScreen() {
@@ -128,14 +128,20 @@ export function DetailsScreen() {
   const titleBar = (
     <TitleBar
       title="Error details"
-      actionsLeft={<IconButtonLink to="/" icon={<ArrowLeftSvg />} />}
+      actionsLeft={
+        <IconButtonLink
+          to="/"
+          title="Back to overview"
+          icon={<ArrowLeftSvg />}
+        />
+      }
       actionsRight={
         externalLink && (
           <a
             href={externalLink}
             target="_blank"
-            rel="noreferrer nofollow"
-            title={"Open in Bugsnag"}
+            rel="noreferrer noopener"
+            title="Open in Bugsnag"
           >
             <ExternalSvg />
           </a>
@@ -197,7 +203,8 @@ export function DetailsScreen() {
       <Sticky>
         <Spacer height="6px" />
         <Label>
-          {list.length} {TITLES[listId as keyof typeof TITLES] || "items"} left
+          {list.length} {TITLES[listId as keyof typeof TITLES] || "item"}
+          {list.length !== 1 ? "s" : ""} left
         </Label>
 
         <Spacer height="2px" />

@@ -10,10 +10,6 @@ export const Section = styled.section<{ reverse?: boolean; stacked?: boolean }>`
   text-align: center;
   overflow: hidden;
 
-  &:first-child {
-    overflow: visible;
-  }
-
   p {
     margin: 1.2rem 0;
     padding: 0;

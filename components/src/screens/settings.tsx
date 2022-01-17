@@ -53,7 +53,13 @@ export function SettingsScreen() {
     <>
       <TitleBar
         title="Settings"
-        actionsLeft={<IconButtonLink to="/" icon={<ArrowLeftSvg />} />}
+        actionsLeft={
+          <IconButtonLink
+            to="/"
+            title="Back to overview"
+            icon={<ArrowLeftSvg />}
+          />
+        }
       />
 
       <p>
@@ -61,7 +67,7 @@ export function SettingsScreen() {
         <a
           href="https://app.bugsnag.com/settings/my-account"
           target="_blank"
-          rel="noreferrer nofollow"
+          rel="noreferrer noopener"
         >
           your bugsnag auth token
         </a>{" "}

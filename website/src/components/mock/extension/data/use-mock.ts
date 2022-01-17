@@ -1,13 +1,32 @@
+import dayjs from "dayjs";
 import { useState } from "react";
-import { Root } from "vscode-bugsnag-stepthrough-components";
-import { BugsnagProvider } from "vscode-bugsnag-stepthrough-components/src/providers/bugsnag";
-import { VSCodeProvider } from "vscode-bugsnag-stepthrough-components/src/providers/vscode";
 import {
+  ErrorDetails,
+  EventDetails,
   Organisation,
   Project,
+  TrendBucket,
 } from "vscode-bugsnag-stepthrough-components/types/bugsnag";
 
-const useMock = () => {
+type UseMockArgs = {
+  errors?: {
+    open: ErrorDetails[];
+    skipped: ErrorDetails[];
+    fixed: ErrorDetails[];
+  };
+  events?: { [key: string]: EventDetails };
+  trends?: { [key: string]: TrendBucket[] };
+};
+
+export const useMock = ({
+  errors: mockErrors = {
+    open: [],
+    skipped: [],
+    fixed: [],
+  },
+  events: mockEvents = {},
+  trends: mockTrends = {},
+}: UseMockArgs = {}) => {
   const mockSettings = {
     global: {
       tokens: ["boring"],
@@ -15,20 +34,6 @@ const useMock = () => {
     workspace: {
       projects: [{ id: "launch", token: "boring" }],
     },
-  };
-
-  const mockErrors = {
-    open: [
-      // {
-      //   id: "catz",
-      //   error_class: "TypeError",
-      //   context: "/awesome/cats",
-      //   message: "Undefined is not an object, duh",
-      //   project_id: "project1",
-      // } as any as ErrorDetails,
-    ],
-    skipped: [],
-    fixed: [],
   };
 
   const [settings, setSettings] = useState(mockSettings);
@@ -72,11 +77,11 @@ const useMock = () => {
         },
       ],
       errors: mockErrors,
-      events: {},
-      trends: {},
+      events: mockEvents,
+      trends: mockTrends,
 
       loadErrors: async ({ key }: any) => ({
-        ...mockErrors,
+        ...(mockErrors || {}),
         key,
       }),
 
@@ -85,14 +90,3 @@ const useMock = () => {
     },
   };
 };
-
-export function HeroMock() {
-  const mockData = useMock();
-  return typeof window !== "undefined" ? (
-    <VSCodeProvider value={mockData.vscode}>
-      <BugsnagProvider value={mockData.bugsnag}>
-        <Root />
-      </BugsnagProvider>
-    </VSCodeProvider>
-  ) : null;
-}

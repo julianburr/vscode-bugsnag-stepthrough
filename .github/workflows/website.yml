@@ -31,7 +31,7 @@ jobs:
       - name: Linting and typechecks
         working-directory: ./website
         run: |-
-          yarn lint
+          yarn lint --quiet
           yarn typecheck
 
       - name: Create .env

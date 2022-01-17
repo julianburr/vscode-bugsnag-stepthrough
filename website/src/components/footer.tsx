@@ -66,7 +66,7 @@ export function Footer() {
             <a
               href="https://www.julianburr.de"
               target="_blank"
-              rel="noreferrer nofollow"
+              rel="noreferrer noopener"
             >
               Julian Burr
             </a>
@@ -76,26 +76,29 @@ export function Footer() {
             <a
               href="https://github.com/julianburr"
               target="_blank"
-              rel="noreferrer nofollow"
+              rel="noreferrer noopener"
               title="@julianburr on Github"
+              aria-label="@julianburr on Github"
             >
-              <GithubSvg />
+              <GithubSvg role="presentation" />
             </a>
             <a
               href="https://www.linkedin.com/in/julianburr/"
               target="_blank"
-              rel="noreferrer nofollow"
+              rel="noreferrer noopener"
               title="@julianburr on LinkedIn"
+              aria-label="@julianburr on LinkedIn"
             >
-              <LinkedInSvg />
+              <LinkedInSvg role="presentation" />
             </a>
             <a
               href="https://twitter.com/jburr90"
               target="_blank"
-              rel="noreferrer nofollow"
+              rel="noreferrer noopener"
               title="@jburr90 on Twitter"
+              aria-label="@jburr90 on Twitter"
             >
-              <TwitterSvg />
+              <TwitterSvg role="presentation" />
             </a>
           </Social>
         </Content>

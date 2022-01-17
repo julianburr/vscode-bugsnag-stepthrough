@@ -8,6 +8,11 @@ const withTM = require("next-transpile-modules")([
 module.exports = withPlugins([withTM], {
   reactStrictMode: true,
 
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
+  },
+
   webpack: (config) => {
     // SVG loader to turn imported SVGs into React components
     config.module.rules.push({

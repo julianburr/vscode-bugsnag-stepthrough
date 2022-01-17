@@ -71,9 +71,9 @@ export function ErrorTrend({ token, projectId, errorId }: ErrorTrendProps) {
   }, [projectId, errorId]);
 
   const largestCount =
-    trend?.reduce((all, trend) => {
-      if (trend.events_count > all) {
-        all = trend.events_count;
+    trend?.reduce((all, t) => {
+      if (t.events_count > all) {
+        all = t.events_count;
       }
       return all;
     }, 0) || 0;

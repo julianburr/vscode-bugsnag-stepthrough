@@ -1,6 +1,5 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
-
-import { HeroMock } from "../extension/hero";
 
 const Container = styled.div`
   display: flex;
@@ -83,7 +82,7 @@ const WrapContent = styled.div`
     --vscode-settings-dropdownBorder: #3c3c3c;
     --vscode-foreground: #cccccc;
     --vscode-editorIndentGuide-background: #404040;
-    --vscode-button-background: #0e639c;
+    --vscode-button-background: var(--color-primary-400-background);
     --vscode-button-foreground: #ffffff;
     --vscode-settings-textInputBackground: #3c3c3c;
     --vscode-settings-textInputForeground: #cccccc;
@@ -91,7 +90,7 @@ const WrapContent = styled.div`
     --vscode-sideBar-background: #252526;
     --vscode-button-secondaryBackground: #3a3d41;
     --vscode-button-secondaryHoverBackground: #45494e;
-    --vscode-button-hoverBackground: #1177bb;
+    --vscode-button-hoverBackground: var(--color-primary-500-background);
   }
 
   [data-theme="quiet-light"] & {
@@ -113,16 +112,18 @@ const WrapContent = styled.div`
   }
 `;
 
-export function SideBar() {
+type SideBarProps = {
+  content?: ReactNode;
+};
+
+export function SideBar({ content }: SideBarProps) {
   return (
     <Container>
       <SidebarTitle>
         <h2>Bugsnag Stepthrough</h2>
       </SidebarTitle>
 
-      <WrapContent>
-        <HeroMock />
-      </WrapContent>
+      <WrapContent>{content}</WrapContent>
     </Container>
   );
 }

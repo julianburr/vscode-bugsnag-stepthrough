@@ -51,9 +51,13 @@ function Router() {
   );
 }
 
-export function Root() {
+type RootProps = {
+  initialEntries?: string[];
+};
+
+export function Root({ initialEntries }: RootProps) {
   return (
-    <MemoryRouter>
+    <MemoryRouter initialEntries={initialEntries}>
       <Router />
     </MemoryRouter>
   );

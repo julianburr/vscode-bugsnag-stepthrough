@@ -85,7 +85,13 @@ export function OverviewScreen() {
     <>
       <TitleBar
         title="Overview"
-        actionsRight={<IconButtonLink to="/settings" icon={<SettingsSvg />} />}
+        actionsRight={
+          <IconButtonLink
+            to="/settings"
+            title="Open settings"
+            icon={<SettingsSvg />}
+          />
+        }
       />
 
       <Spacer height="6px" />
