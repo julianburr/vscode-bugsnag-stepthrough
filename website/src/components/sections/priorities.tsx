@@ -1,15 +1,9 @@
-import styled from "styled-components";
+import { ExtensionPreview } from "../extension-preview";
 import { Inner } from "../inner";
+import { ExtensionMock } from "../mock/extension/priorities";
 import { Section } from "../section";
 import { SectionContent } from "../section-content";
 import { SectionImage } from "../section-image";
-import { Placeholder } from "../placeholder";
-
-const Image = styled(Placeholder)`
-  @media (min-width: 850px) {
-    margin-right: 40%;
-  }
-`;
 
 export function PrioritiesSection() {
   return (
@@ -23,7 +17,7 @@ export function PrioritiesSection() {
           </p>
         </SectionContent>
         <SectionImage>
-          <Image />
+          <ExtensionPreview content={<ExtensionMock />} height="21rem" />
         </SectionImage>
       </Inner>
     </Section>

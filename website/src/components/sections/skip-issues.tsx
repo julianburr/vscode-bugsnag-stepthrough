@@ -1,8 +1,10 @@
+import { ExtensionPreview } from "../extension-preview";
 import { Inner } from "../inner";
+import { Marker } from "../marker";
+import { ExtensionMock } from "../mock/extension/skip-issues";
 import { Section } from "../section";
 import { SectionContent } from "../section-content";
 import { SectionImage } from "../section-image";
-import { Placeholder } from "../placeholder";
 
 export function SkipIssuesSection() {
   return (
@@ -19,7 +21,10 @@ export function SkipIssuesSection() {
           </p>
         </SectionContent>
         <SectionImage>
-          <Placeholder />
+          <ExtensionPreview
+            content={<ExtensionMock />}
+            markers={<Marker top="22.7rem" left="12.5rem" />}
+          />
         </SectionImage>
       </Inner>
     </Section>

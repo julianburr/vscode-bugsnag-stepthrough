@@ -1,8 +1,10 @@
+import { ExtensionPreview } from "../extension-preview";
 import { Inner } from "../inner";
+import { Marker } from "../marker";
+import { ExtensionMock } from "../mock/extension/getting-started";
 import { Section } from "../section";
 import { SectionContent } from "../section-content";
 import { SectionImage } from "../section-image";
-import { Placeholder } from "../placeholder";
 
 export function GettingStartedSection() {
   return (
@@ -24,7 +26,16 @@ export function GettingStartedSection() {
           </p>
         </SectionContent>
         <SectionImage>
-          <Placeholder />
+          <ExtensionPreview
+            content={<ExtensionMock />}
+            markers={
+              <>
+                <Marker top="15.2rem" right="-7.2rem" />
+                <Marker top="35.2rem" right="11.2rem" />
+              </>
+            }
+            height="39rem"
+          />
         </SectionImage>
       </Inner>
     </Section>

@@ -1,6 +1,5 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
-
-import { HeroMock } from "../extension/hero";
 
 const Container = styled.div`
   display: flex;
@@ -113,16 +112,18 @@ const WrapContent = styled.div`
   }
 `;
 
-export function SideBar() {
+type SideBarProps = {
+  content?: ReactNode;
+};
+
+export function SideBar({ content }: SideBarProps) {
   return (
     <Container>
       <SidebarTitle>
         <h2>Bugsnag Stepthrough</h2>
       </SidebarTitle>
 
-      <WrapContent>
-        <HeroMock />
-      </WrapContent>
+      <WrapContent>{content}</WrapContent>
     </Container>
   );
 }

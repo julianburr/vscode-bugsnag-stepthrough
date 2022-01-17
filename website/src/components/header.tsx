@@ -12,6 +12,7 @@ import BugsnagSvg from "src/assets/icons/bugsnag.svg";
 
 import { Inner } from "./inner";
 import { VSCodeMock } from "./mock/vscode";
+import { ExtensionMock } from "./mock/extension/complete";
 
 const wiggle = keyframes`
   0% {
@@ -326,7 +327,7 @@ export function Header() {
           </WrapContent>
 
           <WrapMock role="presentation">
-            <VSCodeMock />
+            <VSCodeMock content={<ExtensionMock />} />
           </WrapMock>
         </Inner>
       </Container>

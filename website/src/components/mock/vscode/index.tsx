@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
 import { Content } from "./content";
@@ -96,7 +96,11 @@ const WrapSideBar = styled.div`
   }
 `;
 
-export function VSCodeMock() {
+type VSCodeMockProps = {
+  content?: ReactNode;
+};
+
+export function VSCodeMock({ content }: VSCodeMockProps) {
   const [visible, setVisible] = useState(true);
   return visible ? (
     <Container data-theme="dark">
@@ -104,7 +108,7 @@ export function VSCodeMock() {
       <WrapContent>
         <SideMenu />
         <WrapSideBar>
-          <SideBar />
+          <SideBar content={content} />
         </WrapSideBar>
         <Content />
       </WrapContent>
