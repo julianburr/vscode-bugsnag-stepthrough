@@ -38,7 +38,7 @@
     "webviews:dev": "yarn webviews:build --sourcemap --watch",
     "typecheck": "tsc -p ./",
     "lint": "eslint .",
-    "release": "vsce package && vsce publish --yarn"
+    "release": "vsce package --yarn && vsce publish --yarn"
   },
   "dependencies": {
     "classnames": "^2.3.1",
