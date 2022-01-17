@@ -4,8 +4,6 @@ The extension nobody asked for 😅🚀
 
 Bugsnag Extension for [VS Code](https://code.visualstudio.com/) that allows you to connect to your Bugsnag account (or multiple if you want to), select the relevant projects for your current workspace and see all open issues directly in your IDE. Then simply step through the issues one by one and get rid of them 🥳
 
-**NOTE: This is not an official Bugsnag product, I have no connection to Bugsnag. This is just a small side project of mine!**
-
 ## Install
 
 If you have VS Code installed, simply click <a href="vscode:extension/julianburr.vscode-bugsnag-stepthrough" target="_blank">here</a> to open the extension page and click "Install".
