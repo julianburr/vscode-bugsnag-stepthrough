@@ -44,7 +44,10 @@ export const useMock = ({
       settings,
       getSettings: async () => settings,
       updateSetting: {
-        global: async ({ key, value }: any) =>
+        global: async ({ key, value }: any) => {
+          if (key === "tokens") {
+            window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+          }
           setSettings((state) =>
             key === "tokens"
               ? state
@@ -52,7 +55,8 @@ export const useMock = ({
                   ...state,
                   global: { ...state.global, [key]: value },
                 }
-          ),
+          );
+        },
         workspace: async ({ key, value }: any) =>
           setSettings((state) => ({
             ...state,
@@ -70,9 +74,21 @@ export const useMock = ({
           token: "boring",
           data: { name: "SpaceX Technologies Corp." } as any as Organisation,
           projects: [
-            { id: "website", name: "Marketing Website" } as any as Project,
-            { id: "launch", name: "Space Launch System" } as any as Project,
-            { id: "starman", name: "Starman Roadster" } as any as Project,
+            {
+              id: "website",
+              name: "Marketing Website",
+              html_url: "https://space.x",
+            } as any as Project,
+            {
+              id: "launch",
+              name: "Space Launch System",
+              html_url: "https://space.x",
+            } as any as Project,
+            {
+              id: "starman",
+              name: "Starman Roadster",
+              html_url: "https://space.x",
+            } as any as Project,
           ],
         },
       ],

@@ -15,7 +15,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const desc =
     "The VS Code extension that helps you get on top of your open issues in Bugsnag";
 
-  const preview = `${process.env.API_BASE_URL}${previewPng.src}`;
+  const preview =
+    `https://vscode-bugsnag-stepthrough.vercel.app` + previewPng.src;
 
   return (
     <>

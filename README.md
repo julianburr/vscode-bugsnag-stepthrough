@@ -1,3 +1,0 @@
-# VS Code Bugsnag Extension
-
-...

@@ -61,17 +61,6 @@ export function FaqsSection() {
             </a>
             .
           </p>
-          <p>
-            If you dont have a Bugsnag account, you can find help{" "}
-            <a
-              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              here
-            </a>
-            .
-          </p>
 
           <h3>How can I use this plugin in a monorepo?</h3>
           <p>
