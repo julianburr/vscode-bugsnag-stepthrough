@@ -43,8 +43,8 @@ const GlobalStyles = createGlobalStyle`
     --color-message-foreground: var(--color-primary-700-foreground);
 
     @media (prefers-color-scheme: dark) {
-      --color-main-background: #1e1e1e;
-      --color-main-background-alt: #252526;
+      --color-main-background: #1c1c1c;
+      --color-main-background-alt: #161616;
       --color-main-foreground: #e8e8e8;
       --color-background-foreground: #fff;
       --color-footer-background: #111;

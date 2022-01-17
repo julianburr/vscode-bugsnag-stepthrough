@@ -69,7 +69,7 @@ export const GlobalMockStyles = createGlobalStyle`
   }
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ visible: boolean }>`
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -77,6 +77,11 @@ const Container = styled.div`
   width: 120rem;
   height: 70rem;
   background: var(--mock-vscode-topbar-background);
+  transition: opacity 0.2s, transform 0.2s;
+  transform-origin: center center;
+  opacity: ${(props) => (props.visible ? "1" : "0")};
+  transform: ${(props) =>
+    props.visible ? "translate3d(0, 0, 0)" : "translate3d(8rem, 30rem, 0)"};
 `;
 
 const WrapContent = styled.div`
@@ -102,8 +107,8 @@ type VSCodeMockProps = {
 
 export function VSCodeMock({ content }: VSCodeMockProps) {
   const [visible, setVisible] = useState(true);
-  return visible ? (
-    <Container data-theme="dark" role="presentation">
+  return (
+    <Container visible={visible} data-theme="dark" role="presentation">
       <TopBar onClose={() => setVisible(false)} />
       <WrapContent>
         <SideMenu />
@@ -113,5 +118,5 @@ export function VSCodeMock({ content }: VSCodeMockProps) {
         <Content />
       </WrapContent>
     </Container>
-  ) : null;
+  );
 }

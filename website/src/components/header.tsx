@@ -151,7 +151,7 @@ const Subtitle = styled.span`
   font-family: Quicksand;
 `;
 
-const Button = styled.button`
+const Button = styled.a`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -165,8 +165,10 @@ const Button = styled.button`
   border-radius: 0.4rem;
   margin: 3.2rem 0;
   transition: background 0.2s;
+  width: 22rem;
 
   @media (min-width: 850px) {
+    width: auto;
     margin: 3.2rem 0 0;
   }
 
@@ -179,36 +181,7 @@ const Button = styled.button`
   & svg {
     height: 1.4em;
     width: auto;
-    margin: 0 1.2rem 0 0;
-  }
-`;
-
-const OutlineLink = styled.a`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 0 1.8rem;
-  height: 4.8rem;
-  width: 19rem;
-  font: inherit;
-  font-size: 1.6rem;
-  color: var(--color-outline-button-foreground);
-  border: 0.2rem solid currentColor;
-  border-radius: 0.4rem;
-  text-decoration: none;
-  transition: color 0.2s, border 0.2s;
-
-  &:hover,
-  &:focus {
-    text-decoration: none;
-    color: var(--color-outline-button-hover-foreground);
-  }
-
-  & svg {
-    height: 1.4em;
-    width: auto;
-    margin: 0 0.6rem 0 0;
+    margin: 0 0.8rem 0 0;
   }
 `;
 
@@ -222,25 +195,6 @@ const WrapMock = styled.div`
 
   @media (min-width: 850px) {
     display: flex;
-  }
-`;
-
-const Hero = styled.div`
-  position: absolute;
-  top: 3rem;
-  left: calc(50% + 20.5rem);
-  height: 50rem;
-  z-index: 1;
-  transform: rotate(12deg);
-  display: none;
-
-  @media (min-width: 850px) {
-    display: flex;
-  }
-
-  img {
-    height: 100%;
-    width: auto;
   }
 `;
 
@@ -312,18 +266,46 @@ export function Header() {
               making it part of your daily routine.
             </Subtitle>
 
-            <Button
-              onClick={() => {
-                event({ action: "install_clicked" });
-                customProtocolCheck(
-                  "vscode:extension/julianburr.vscode-bugsnag-stepthrough",
-                  () =>
-                    alert("You need to have VSCode installed for this to work!")
-                );
-              }}
-            >
-              Install in VS Code
-            </Button>
+            <WrapButtons>
+              <Button
+                href="#install"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  event({ action: "install_clicked" });
+                  customProtocolCheck(
+                    "vscode:extension/julianburr.vscode-bugsnag-stepthrough",
+                    () =>
+                      alert(
+                        "You need to have VSCode installed for this to work!"
+                      )
+                  );
+                }}
+              >
+                Install
+              </Button>
+              <Button
+                href="https://github.com/julianburr/vscode-bugsnag-stepthrough"
+                target="_blank"
+                rel="noreferral noopener"
+              >
+                <GithubSvg />
+                <span>View on Github</span>
+              </Button>
+              <Button
+                href={
+                  `https://twitter.com/intent/tweet` +
+                  `?text=${encodeURIComponent(twitterText)}` +
+                  `&url=${encodeURIComponent(twitterUrl)}` +
+                  `&via=jburr90`
+                }
+                target="_blank"
+                rel="noreferral noopener"
+              >
+                <TwitterSvg />
+                <span>Share on Twitter</span>
+              </Button>
+            </WrapButtons>
           </WrapContent>
 
           <WrapMock role="presentation">
@@ -331,30 +313,6 @@ export function Header() {
           </WrapMock>
         </Inner>
       </Container>
-
-      <WrapButtons>
-        <OutlineLink
-          href="https://github.com/julianburr/vscode-bugsnag-stepthrough"
-          target="_blank"
-          rel="noreferral nofollow"
-        >
-          <GithubSvg />
-          <span>View on Github</span>
-        </OutlineLink>
-        <OutlineLink
-          href={
-            `https://twitter.com/intent/tweet` +
-            `?text=${encodeURIComponent(twitterText)}` +
-            `&url=${encodeURIComponent(twitterUrl)}` +
-            `&via=jburr90`
-          }
-          target="_blank"
-          rel="noreferral nofollow"
-        >
-          <TwitterSvg />
-          <span>Share on Twitter</span>
-        </OutlineLink>
-      </WrapButtons>
     </>
   );
 }
