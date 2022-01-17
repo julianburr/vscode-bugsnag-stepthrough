@@ -1,6 +1,7 @@
 {
-  "name": "website",
   "private": true,
+  "name": "vscode-bugsnag-stepthrough-website",
+  "version": "0.0.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -16,7 +17,8 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "styled-components": "^5.3.3",
-    "twemoji": "^13.1.0"
+    "twemoji": "^13.1.0",
+    "vscode-bugsnag-stepthrough-components": "^0.0.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.2.0",
@@ -36,6 +38,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "next-compose-plugins": "^2.2.1",
+    "next-transpile-modules": "^9.0.0",
     "prettier": "^2.5.1",
     "typescript": "4.5.4"
   }

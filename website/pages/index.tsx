@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import twemoji from "twemoji";
 
+import { GlobalMockStyles } from "src/components/mock/vscode";
 import { Header } from "src/components/header";
 import { GettingStartedSection } from "src/components/sections/getting-started";
 import { StepthroughSection } from "src/components/sections/stepthrough";
@@ -12,6 +13,8 @@ import { Footer } from "src/components/footer";
 
 const GlobalStyles = createGlobalStyle`
   :root {
+    --color-primary-300-background: #9da8fb;
+    --color-primary-300-foreground: #222;
     --color-primary-400-background: #6b77fd;
     --color-primary-400-foreground: #fff;
     --color-primary-500-background: #4949e4;
@@ -30,13 +33,30 @@ const GlobalStyles = createGlobalStyle`
     --color-main-foreground: #222;
     --color-footer-background: #eee;
     --color-footer-foreground: #888;
+    --color-link-foreground: var(--color-primary-500-background);
+    --color-hover-foreground: var(--color-primary-700-background);
+    --color-outline-button-foreground: var(--color-primary-400-background);
+    --color-outline-button-hover-foreground: var(--color-primary-600-background);
+    --color-hero-dark-background: var(--color-primary-500-background);
+    --color-hero-light-background: var(--color-primary-400-background);
+    --color-message-background: var(--color-primary-700-background);
+    --color-message-foreground: var(--color-primary-700-foreground);
 
     @media (prefers-color-scheme: dark) {
       --color-main-background: #1e1e1e;
       --color-main-background-alt: #252526;
-      --color-main-foreground: #fff;
+      --color-main-foreground: #e8e8e8;
       --color-background-foreground: #fff;
+      --color-footer-background: #111;
       --color-footer-foreground: #ccc;
+      --color-link-foreground: var(--color-primary-400-background);
+      --color-link-hover-foreground: var(--color-primary-300-background);
+      --color-outline-button-foreground: var(--color-main-foreground);
+      --color-outline-button-hover-foreground: var(--color-primary-300-background);
+      --color-hero-dark-background: var(--color-primary-600-background);
+      --color-hero-light-background: var(--color-primary-700-background);
+      --color-message-background: var(--color-primary-800-background);
+      --color-message-foreground: var(--color-primary-800-foreground);
     }
   }
 
@@ -104,13 +124,13 @@ const GlobalStyles = createGlobalStyle`
   }
 
   a {
-    color: var(--color-primary-500-background);
+    color: var(--color-link-foreground);
     text-decoration: none;
     transition: color .2s;
 
     &:hover,
     &:focus{
-      color: var(--color-primary-700-background);
+      color: var(--color-link-hover-foreground);
       text-decoration: underline;
     }
   }
@@ -132,6 +152,8 @@ export default function Home() {
   return (
     <>
       <GlobalStyles />
+      <GlobalMockStyles />
+
       <Container>
         <Header />
 

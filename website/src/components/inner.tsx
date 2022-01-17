@@ -5,4 +5,10 @@ export const Inner = styled.div`
   max-width: 95rem;
   margin: 0 auto;
   padding: 2.4rem;
+  position: relative;
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
 `;

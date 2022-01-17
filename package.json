@@ -1,8 +1,14 @@
 {
+  "private": true,
   "scripts": {
     "lint:staged": "lint-staged",
     "prepare": "husky install"
   },
+  "workspaces": [
+    "components",
+    "extension",
+    "website"
+  ],
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-conventional": "^15.0.0",

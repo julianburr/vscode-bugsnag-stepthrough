@@ -6,12 +6,20 @@ on:
       - main
     paths:
       - extension/**
+      - components/**
 
 jobs:
   deploy_extension:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: Checkout GitHub Actions Repo
+        uses: actions/checkout@v2
+        with:
+          repository: julianburr/github-actions
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: .github/actions/custom-actions
 
       - name: Get version from package.json
         id: package-version
@@ -27,6 +35,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Use node modules from cache if available
+        uses: ./.github/actions/custom-actions/cache-node-modules
+
+      - name: Install dependencies
+        run: |-
+          yarn
+
       - name: Create env.ts file
         working-directory: ./extension
         run: |-
@@ -35,7 +50,6 @@ jobs:
       - name: Run tests and linter
         working-directory: ./extension
         run: |-
-          yarn
           yarn lint --quiet
           yarn typecheck
 

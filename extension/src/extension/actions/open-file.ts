@@ -11,8 +11,6 @@ export const openFile = {
       message.data?.column || 0
     );
 
-    console.log({ message, pos });
-
     const workspacePath = workspace.workspaceFolders?.[0]?.uri?.path;
     const cleanPath = message.data.filePath.replace("webpack-internal:///", "");
     const filePath = workspacePath
