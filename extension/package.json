@@ -3,7 +3,7 @@
   "name": "vscode-bugsnag-stepthrough-extension",
   "displayName": "Bugsnag Stepthrough",
   "description": "VS Code plugin for Bugsnag",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "vscode": "^1.63.1"
   },
