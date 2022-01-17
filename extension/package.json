@@ -21,6 +21,7 @@
   ],
   "preview": true,
   "icon": "assets/images/icon.png",
+  "homepage": "https://vscode-bugsnag-stepthrough.vercel.app",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/julianburr/vscode-bugsnag-stepthrough.git"
