@@ -35,8 +35,9 @@ jobs:
           yarn typecheck
 
       - name: Create .env
-        uses: SpicyPizza/create-envfile@v1
+        uses: SpicyPizza/create-envfile@v1.2
         with:
+          directory: ./website
           envkey_NEXT_PUBLIC_GOOGLE_ANALYTICS: ${{ secrets.GOOGLE_ANALYTICS_ID }}
 
       - name: Deploy via Vercel
