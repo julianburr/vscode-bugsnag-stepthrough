@@ -21,9 +21,15 @@ type ErrorSummaryProps = {
 };
 
 const formatCode = (code: any) => {
-  if(typeof code == "string"){ return code; }
-  if(Array.isArray(code)) { return code.join('\n'); }
-  if(typeof code == "object") { return Object.values(code).join('\n'); }
+  if (typeof code == "string") {
+    return code;
+  }
+  if (Array.isArray(code)) {
+    return code.join("\n");
+  }
+  if (typeof code == "object") {
+    return Object.values(code).join("\n");
+  }
   // avoid crashing if we get an unexpected type
   return JSON.stringify(code);
 };
