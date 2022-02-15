@@ -19,7 +19,7 @@ export function StacktraceList({ items }: StacktraceListProps) {
               e.stopPropagation();
               openFile?.({
                 filePath: item.file,
-                line: item.line_number,
+                line: (item.line_number || 1) - 1, // vscode lines are 0-indexed
                 column: item.column_number,
               });
             }}

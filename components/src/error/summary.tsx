@@ -77,7 +77,7 @@ export function ErrorSummary({ token, data }: ErrorSummaryProps) {
               onClick={() =>
                 openFile?.({
                   filePath: stack?.[0]?.file,
-                  line: stack?.[0]?.line_number,
+                  line: (stack?.[0]?.line_number || 1) - 1, // vscode lines are 0-indexed
                   column: stack?.[0]?.column_number,
                 })
               }
