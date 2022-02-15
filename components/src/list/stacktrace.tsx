@@ -17,9 +17,13 @@ export function StacktraceList({ items }: StacktraceListProps) {
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
+
+              // VSCode lines are 0-indexed, while Bugsnag lines are 1-indexed :/
+              const lineNumber = item.line_number ? item.line_number - 1 : 0;
+
               openFile?.({
                 filePath: item.file,
-                line: item.line_number,
+                line: lineNumber,
                 column: item.column_number,
               });
             }}

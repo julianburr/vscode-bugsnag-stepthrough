@@ -20,6 +20,20 @@ type ErrorSummaryProps = {
   data?: ErrorDetails;
 };
 
+const formatCode = (code: any) => {
+  if (typeof code == "string") {
+    return code;
+  }
+  if (Array.isArray(code)) {
+    return code.join("\n");
+  }
+  if (typeof code == "object") {
+    return Object.values(code).join("\n");
+  }
+  // avoid crashing if we get an unexpected type
+  return JSON.stringify(code);
+};
+
 export function ErrorSummary({ token, data }: ErrorSummaryProps) {
   const { openFile } = useVSCode();
 
@@ -69,7 +83,7 @@ export function ErrorSummary({ token, data }: ErrorSummaryProps) {
               onClick={() =>
                 openFile?.({
                   filePath: stack?.[0]?.file,
-                  line: stack?.[0]?.line_number,
+                  line: (stack?.[0]?.line_number || 1) - 1, // vscode lines are 0-indexed
                   column: stack?.[0]?.column_number,
                 })
               }
@@ -82,7 +96,7 @@ export function ErrorSummary({ token, data }: ErrorSummaryProps) {
           {stack?.[0]?.code && (
             <>
               <Spacer height="4px" />
-              <pre>{stack?.[0]?.code}</pre>
+              <pre>{formatCode(stack[0].code)}</pre>
             </>
           )}
           <Spacer height="16px" />
